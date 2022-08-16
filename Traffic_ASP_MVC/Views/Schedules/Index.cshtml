@@ -1,0 +1,103 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<Schedule>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Schedule</h1>
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table id="schedule" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th><h4>Date</h4></th>
+            <th><h4>Time Slot</h4></th>
+            <th><h4>Status</h4></th>
+            <th><h4>Type</h4></th>
+            <th><h4># Cartons</h4></th>
+            <th><h4>Cube</h4></th>
+            <th><h4>MBOL #</h4></th>
+            <th><h4>Load #</h4></th>
+            <th><h4>Loader Name</h4></th>
+            <th><h4>Carrier Name</h4></th>
+            <th><h4>Customer Name</h4></th>
+            <th><h4>City</h4></th>
+            <th><h4>State</h4></th>
+            <th><h4>Comments</h4></th>
+            <th><h4>Scheduler</h4></th>
+            <th><h4>Actions</h4></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Data) {
+        <tr>
+            <td class="fit">
+                @Html.DisplayFor(modelItem => item.scheduleDate)
+            </td>
+            <td class="fit">
+                @Html.DisplayFor(modelItem => item.timeSlot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numberCartons)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loadCube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mbolNbr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loadNbr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loaderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.carrierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loadComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loadScheduler)
+            </td>
+            <td class="fit">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                @*<a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@*<cs-pager
+    cs-paging-pagenumber="@Model.PageNumber"
+    cs-paging-totalitems="@Model.TotalItems"
+    cs-paging-pagesize="@Model.PageSize"
+    cs-pagenumber-param="pagenumber"
+    asp-controller="Schedules"
+    asp-action="Index"
+    cs-pager-li-current-class="page-item active"
+    cs-pager-li-other-class="page-item"
+    cs-pager-li-non-active-class="page-item disabled"
+    cs-pager-link-current-class="page-link"
+    cs-pager-link-other-class="page-link"
+></cs-pager>*@
