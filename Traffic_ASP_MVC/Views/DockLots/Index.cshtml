@@ -9,7 +9,7 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table id="docklot" class="table table-bordered table-striped">
+<table id="docklot" class="table table-bordered table-striped w-auto">
     <thead>
         <tr>
             <th><h4>Location</h4></th>
@@ -63,17 +63,3 @@
 }
     </tbody>
 </table>
-
-@*<cs-pager
-    cs-paging-pagenumber="@Model.PageNumber"
-    cs-paging-totalitems="@Model.TotalItems"
-    cs-paging-pagesize="@Model.PageSize"
-    cs-pagenumber-param="pagenumber"
-    asp-controller="DockLots"
-    asp-action="Index"
-    cs-pager-li-current-class="page-item active"
-    cs-pager-li-other-class="page-item"
-    cs-pager-li-non-active-class="page-item disabled"
-    cs-pager-link-current-class="page-link"
-    cs-pager-link-other-class="page-link"
-></cs-pager>*@

@@ -1,5 +1,0 @@
-﻿@using Traffic_ASP_MVC.Models
-
-@model TrailerStatus
-
-@Html.DropDownList("TrailerStat", new SelectList(Enum.GetValues(typeof(Status))), "Select Status", new { @class = "form-control"});
