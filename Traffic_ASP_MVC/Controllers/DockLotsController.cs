@@ -57,6 +57,7 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: DockLots/Create
         public IActionResult Create()
         {
+            ViewBag.Doors = new SelectList(_context.Doors.ToList(), "Location", "Location");
             return View();
         }
 
@@ -65,7 +66,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,location,carrierName,status,trailerNbr,dimension,comments,loadNbr,mbolNbr,timeStamp")] DockLot dockLot)
+        public async Task<IActionResult> Create([Bind("ID,Location,CarrierName,Status,TrailerNbr,Comments, LoadNbr, MbolNbr, Dimension,TimeStamp")] DockLot dockLot)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +80,7 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: DockLots/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.Doors = new SelectList(_context.Doors.ToList(), "Location", "Location");
             if (id == null || _context.DockLot == null)
             {
                 return NotFound();
@@ -97,7 +99,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,location,carrierName,status,trailerNbr,dimension,comments,loadNbr,mbolNbr,timeStamp")] DockLot dockLot)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Location,CarrierName,Status,TrailerNbr,Dimension,Comments,LoadNbr,MbolNbr,TimeStamp")] DockLot dockLot)
         {
             if (id != dockLot.ID)
             {

@@ -15,53 +15,65 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ID" />
                 <div class="form-group">
-                    <label asp-for="location" class="control-label">Location</label>
-                    <input asp-for="location" class="form-control" />
-                    <span asp-validation-for="location" class="text-danger"></span>
+                    <label asp-for="Location" class="control-label">Location</label>
+                    @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, new {@class="form-control"})
+                    <span asp-validation-for="Location" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="carrierName" class="control-label">Carrier Name</label>
-                    <input asp-for="carrierName" class="form-control" />
-                    <span asp-validation-for="carrierName" class="text-danger"></span>
+                    <label asp-for="CarrierName" class="control-label">Carrier Name</label>
+                    <input asp-for="CarrierName" class="form-control" />
+                    <span asp-validation-for="CarrierName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="status" class="control-label">Status</label>
-                    <input asp-for="status" class="form-control" />
-                    <span asp-validation-for="status" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="trailerNbr" class="control-label">Trailer #</label>
-                    <input asp-for="trailerNbr" class="form-control" />
-                    <span asp-validation-for="trailerNbr" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="dimension" class="control-label">Dimension</label>
-                    <input asp-for="dimension" class="form-control" />
-                    <span asp-validation-for="dimension" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="comments" class="control-label">Comments</label>
-                    <input asp-for="comments" class="form-control" />
-                    <span asp-validation-for="comments" class="text-danger"></span>
+                    <label asp-for="Status" class="control-label">Status</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="">Select Status</option>
+                        <option value="Empty">Empty</option>
+                        <option value="Full/InComp">Full/InComp</option>
+                        <option value="Full/InFinished">Full/InFinished</option>
+                        <option value="Full/InMixed">Full/InMixed</option>
+                        <option value="Full/OutComp">Full/OutComp</option>
+                        <option value="Full/OutFinished">Full/OutFinished</option>
+                        <option value="Full/OutMixed">Full/OutMixed</option>
+                        <option value="Reserved">Reserved</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Shuttle">Shuttle</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="loadNbr" class="control-label">Load #</label>
-                    <input asp-for="loadNbr" class="form-control" />
-                    <span asp-validation-for="loadNbr" class="text-danger"></span>
+                    <label asp-for="TrailerNbr" class="control-label">Trailer #</label>
+                    <input asp-for="TrailerNbr" class="form-control" />
+                    <span asp-validation-for="TrailerNbr" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="mbolNbr" class="control-label">MBOL #</label>
-                    <input asp-for="mbolNbr" class="form-control" />
-                    <span asp-validation-for="mbolNbr" class="text-danger"></span>
+                    <label asp-for="Dimension" class="control-label">Dimension</label>
+                    <input asp-for="Dimension" class="form-control" />
+                    <span asp-validation-for="Dimension" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="timeStamp" class="control-label">TimeStamp</label>
-                    <input asp-for="timeStamp" class="form-control" disabled/>
-                    <span asp-validation-for="timeStamp" class="text-danger"></span>
+                    <label asp-for="Comments" class="control-label">Comments</label>
+                    <input asp-for="Comments" class="form-control" />
+                    <span asp-validation-for="Comments" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="LoadNbr" class="control-label">Load #</label>
+                    <input asp-for="LoadNbr" class="form-control" />
+                    <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MbolNbr" class="control-label">MBOL #</label>
+                    <input asp-for="MbolNbr" class="form-control" />
+                    <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TimeStamp" class="control-label">Date</label>
+                    <input type="text" asp-for="TimeStamp" readonly class="form-control" value="@DateTime.Now" />
+                    <span asp-validation-for="TimeStamp" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -72,7 +84,7 @@
                 <div class="form-group mt-3 d-flex flex-column justify-content-end">
                     <input type="submit" value="Save" class="btn btn-primary" />
                     <br />
-                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                    <a class="btn btn-warning" asp-action="Index">Back to List</a>
                 </div>
             </div>            
         </div>

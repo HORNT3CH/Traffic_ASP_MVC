@@ -4,8 +4,8 @@
     {
         public int ID { get; set; }
 
-        public string location { get; set; }
+        public string? Location { get; set; }
 
-        public string status { get; set; }
+        public string? Status { get; set; }
     }
 }

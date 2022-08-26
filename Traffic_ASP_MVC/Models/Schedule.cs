@@ -1,37 +1,40 @@
-﻿namespace Traffic_ASP_MVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Traffic_ASP_MVC.Models
 {
     public class Schedule
     {
         public int ID { get; set; }
 
-        public DateTime scheduleDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ScheduleDate { get; set; }
 
-        public string timeSlot { get; set; }
+        public string? TimeSlot { get; set; }
 
-        public string status { get; set; }
+        public string? Status { get; set; }
 
-        public string type { get; set; }
+        public string? Type { get; set; }
 
-        public int numberCartons { get; set; }
+        public int NumberCartons { get; set; }
 
-        public int loadCube { get; set; }
+        public int LoadCube { get; set; }
 
-        public string mbolNbr { get; set; }
+        public string? MbolNbr { get; set; }
 
-        public string loadNbr { get; set; }
+        public string? LoadNbr { get; set; }
 
-        public string loaderName { get; set; }
+        public string? LoaderName { get; set; }
 
-        public string carrierName { get; set; }
+        public string? CarrierName { get; set; }
 
-        public string customerName { get; set; }
+        public string? CustomerName { get; set; }
 
-        public string customerCity { get; set; }
+        public string? CustomerCity { get; set; }
 
-        public string customerState { get; set; }
+        public string? CustomerState { get; set; }
 
-        public string loadComments { get; set; }
+        public string? LoadComments { get; set; }
 
-        public string loadScheduler { get; set; }
+        public string? LoadScheduler { get; set; }
     }
 }
