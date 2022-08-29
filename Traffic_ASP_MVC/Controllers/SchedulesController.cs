@@ -58,6 +58,12 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: Schedules/Create
         public IActionResult Create()
         {
+            ViewBag.Coordinator = new SelectList(_context.Coordinators.ToList().OrderBy(x => x.CoordinatorName), "CoordinatorName", "CoordinatorName");
+            ViewBag.Carrier = new SelectList(_context.Carriers.ToList().OrderBy(x => x.CarrierName), "CarrierName", "CarrierName");
+            ViewBag.Customer = new SelectList(_context.Customers.ToList().OrderBy(x => x.CustomerName), "CustomerName", "CustomerName");
+            ViewBag.TimeSlot = new SelectList(_context.TimeSlots.ToList().OrderBy(x => x.Id), "SlotName", "SlotName");
+            ViewBag.City = new SelectList(_context.Cities.ToList().OrderBy(x => x.CityName), "CityName", "CityName");
+            ViewBag.State = new SelectList(_context.States.ToList().OrderBy(x => x.StateName), "StateName", "StateName");
             return View();
         }
 
@@ -80,6 +86,12 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: Schedules/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.Coordinator = new SelectList(_context.Coordinators.ToList().OrderBy(x => x.CoordinatorName), "CoordinatorName", "CoordinatorName");
+            ViewBag.Carrier = new SelectList(_context.Carriers.ToList().OrderBy(x => x.CarrierName), "CarrierName", "CarrierName");
+            ViewBag.Customer = new SelectList(_context.Customers.ToList().OrderBy(x => x.CustomerName), "CustomerName", "CustomerName");
+            ViewBag.TimeSlot = new SelectList(_context.TimeSlots.ToList().OrderBy(x => x.Id), "SlotName", "SlotName");
+            ViewBag.City = new SelectList(_context.Cities.ToList().OrderBy(x => x.CityName), "CityName", "CityName");
+            ViewBag.State = new SelectList(_context.States.ToList().OrderBy(x => x.StateName), "StateName", "StateName");
             if (id == null || _context.Schedule == null)
             {
                 return NotFound();

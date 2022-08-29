@@ -11,6 +11,34 @@
     "mssql3": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:Traffic_Door_Context"
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:CoordinatorsContext"
+    },
+    "mssql5": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_Coordinators_Context"
+    },
+    "mssql6": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_Carriers_Context"
+    },
+    "mssql7": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_Customers_Context"
+    },
+    "mssql8": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_TimeSlots_Context"
+    },
+    "mssql9": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_Cities_Context"
+    },
+    "mssql10": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Traffic_States_Context"
     }
   }
 }

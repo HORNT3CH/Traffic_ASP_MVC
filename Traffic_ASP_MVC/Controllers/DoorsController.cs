@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cloudscribe.Pagination.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +21,21 @@ namespace Traffic_ASP_MVC.Controllers
         }
 
         // GET: Doors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 500)
         {
-            return _context.Doors != null ?
-                        View(await _context.Doors.ToListAsync()) :
-                        Problem("Entity set 'Traffic_Door_Context.Doors'  is null.");
+            int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+
+            var theLocation = _context.Doors.Skip(ExcludeRecords).Take(pageSize);
+
+            var result = new PagedResult<Doors>
+            {
+                Data = await theLocation.AsNoTracking().ToListAsync(),
+                TotalItems = _context.Doors.Count(),
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            return View(result);
         }
 
         // GET: Doors/Details/5

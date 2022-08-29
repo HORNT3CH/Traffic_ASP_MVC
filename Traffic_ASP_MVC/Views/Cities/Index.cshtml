@@ -1,0 +1,39 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<Cities>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>City</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table id="city" class="table table-bordered table-striped w-auto">
+            <thead>
+                <tr>
+                    <th>City Name</th>
+                    <th>Action Buttons</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model.Data) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CityName)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+

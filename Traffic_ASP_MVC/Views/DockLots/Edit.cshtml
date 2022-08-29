@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="CarrierName" class="control-label">Carrier Name</label>
-                    <input asp-for="CarrierName" class="form-control" />
+                    @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
                     <span asp-validation-for="CarrierName" class="text-danger"></span>
                 </div>
                 <div class="form-group">

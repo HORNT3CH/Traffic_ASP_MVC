@@ -23,7 +23,7 @@ namespace Traffic_ASP_MVC.Controllers
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
 
-            var theDockLot = _context.DockLot.Skip(ExcludeRecords).Take(pageSize);
+            var theDockLot = _context.DockLot.Skip(ExcludeRecords).Take(pageSize).OrderBy(x => x.CarrierName);
             
             var result = new PagedResult<DockLot>
             {
@@ -57,7 +57,8 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: DockLots/Create
         public IActionResult Create()
         {
-            ViewBag.Doors = new SelectList(_context.Doors.ToList(), "Location", "Location");
+            ViewBag.Doors = new SelectList(_context.Doors.ToList().OrderBy(x => x.Location), "Location", "Location");
+            ViewBag.Carrier = new SelectList(_context.Carriers.ToList().OrderBy(x => x.CarrierName), "CarrierName", "CarrierName");
             return View();
         }
 
@@ -80,7 +81,8 @@ namespace Traffic_ASP_MVC.Controllers
         // GET: DockLots/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Doors = new SelectList(_context.Doors.ToList(), "Location", "Location");
+            ViewBag.Doors = new SelectList(_context.Doors.ToList().OrderBy(x => x.Location), "Location", "Location");
+            ViewBag.Carrier = new SelectList(_context.Carriers.ToList().OrderBy(x => x.CarrierName), "CarrierName", "CarrierName");
             if (id == null || _context.DockLot == null)
             {
                 return NotFound();

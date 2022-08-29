@@ -22,3 +22,7 @@ body {
     white-space: nowrap;
     width: 1%;
 }
+
+.card {
+    min-height: 120px;
+}

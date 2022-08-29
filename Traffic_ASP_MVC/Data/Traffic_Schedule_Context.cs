@@ -15,5 +15,17 @@ namespace Traffic_ASP_MVC.Data
         }
 
         public DbSet<Traffic_ASP_MVC.Models.Schedule> Schedule { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.Coordinators> Coordinators { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.Carriers> Carriers { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.Customers> Customers { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.TimeSlots> TimeSlots { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.Cities> Cities { get; set; } = default!;
+
+        public DbSet<Traffic_ASP_MVC.Models.States> States { get; set; } = default!;
     }
 }

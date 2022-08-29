@@ -61,7 +61,27 @@
         $('#docklot').DataTable();
     });
     $(document).ready(function() {
-        $('.datepicker').datepicker();
+        $('#carrier').DataTable();
+    });
+    $(document).ready(function() {
+        $('#coordinator').DataTable();
+    });
+    $(document).ready(function() {
+        $('#customer').DataTable();
+    });
+    $(document).ready(function() {
+        $('#state').DataTable();
+    });
+    $(document).ready(function() {
+        $('#city').DataTable();
+    });
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "mm/dd/yy",
+            yearRange: "-90:+00"
+        });
     });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
