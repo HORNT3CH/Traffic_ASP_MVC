@@ -67,7 +67,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,location,status")] Doors doors)
+        public async Task<IActionResult> Create([Bind("ID,Location,Status")] Doors doors)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,location,status")] Doors doors)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Location,Status")] Doors doors)
         {
             if (id != doors.ID)
             {

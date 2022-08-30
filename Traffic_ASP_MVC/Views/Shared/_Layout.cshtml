@@ -22,7 +22,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
@@ -83,6 +83,50 @@
             yearRange: "-90:+00"
         });
     });
+    $(document).ready(function() {
+        $('#loadStatusSel').change(function() {
+            var strType = $('#loadStatusSel').val();
+            $('.form-control-sm').val(strType).focus();
+        });
+    });
+    $(document).ready(function() {
+        $('#loadTypeSel').change(function() {
+            var strType = $('#loadTypeSel').val();
+            $('.form-control-sm').val(strType).focus();
+        });
+    });
+    $(document).ready(function() {
+        $('#start').click(function() {
+            var d = new Date();
+            var output = d.toLocaleDateString('sv', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            })
+            $('#startTime').val(output);
+            console.log(output);
+        });
+    });
+    $(document).ready(function() {
+        $('#finish').click(function() {
+            var d = new Date();
+            var output = d.toLocaleDateString('sv', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            })
+            $('#finishTime').val(output);
+            console.log(output);
+        });
+    });
+
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

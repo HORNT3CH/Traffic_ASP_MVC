@@ -36,5 +36,11 @@ namespace Traffic_ASP_MVC.Models
         public string? LoadComments { get; set; }
 
         public string? LoadScheduler { get; set; }
+
+        public string? Location { get; set; }
+
+        public DateTime? StartTime { get; set; }
+
+        public DateTime? FinishTime { get; set; }
     }
 }

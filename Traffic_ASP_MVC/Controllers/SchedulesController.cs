@@ -72,7 +72,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler")] Schedule schedule)
+        public async Task<IActionResult> Create([Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +92,7 @@ namespace Traffic_ASP_MVC.Controllers
             ViewBag.TimeSlot = new SelectList(_context.TimeSlots.ToList().OrderBy(x => x.Id), "SlotName", "SlotName");
             ViewBag.City = new SelectList(_context.Cities.ToList().OrderBy(x => x.CityName), "CityName", "CityName");
             ViewBag.State = new SelectList(_context.States.ToList().OrderBy(x => x.StateName), "StateName", "StateName");
+            ViewBag.Doors = new SelectList(_context.Doors.ToList().Where(y => y.Status == "Open").OrderBy(x => x.Location), "Location", "Location");
             if (id == null || _context.Schedule == null)
             {
                 return NotFound();
@@ -110,7 +111,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler")] Schedule schedule)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime")] Schedule schedule)
         {
             if (id != schedule.ID)
             {
