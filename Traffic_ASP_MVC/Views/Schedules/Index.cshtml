@@ -1,10 +1,9 @@
 ﻿@model cloudscribe.Pagination.Models.PagedResult<Schedule>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Schedule";
 }
 
-<h1>Schedule</h1>
 <div class="container text-center">
   <div class="row">
     <div class="col">
@@ -42,95 +41,97 @@
   </div>
 </div>
 
+<div class="container-fluid">
+    <table id="schedule" class="table table-bordered table-striped w-auto">
+        <thead>
+            <tr>
+                <th><h4>Actions</h4></th>
+                <th><h4>Date</h4></th>
+                <th><h4>Time Slot</h4></th>
+                <th><h4>Status</h4></th>
+                <th><h4>Type</h4></th>
+                <th><h4># Cartons</h4></th>
+                <th><h4>Cube</h4></th>
+                <th><h4>MBOL #</h4></th>
+                <th><h4>Load #</h4></th>
+                <th><h4>Loader Name</h4></th>
+                <th><h4>Carrier Name</h4></th>
+                <th><h4>Customer Name</h4></th>
+                <th><h4>City</h4></th>
+                <th><h4>State</h4></th>
+                <th><h4>Comments</h4></th>
+                <th><h4>Scheduler</h4></th>
+                <th>Location</th>
+                <th>Start Time</th>
+                <th>Finish Time</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Data) {
+            <tr>
+                <td class="fit">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+                <td class="fit">
+                    @Html.DisplayFor(modelItem => item.ScheduleDate)
+                </td>
+                <td class="fit">
+                    @Html.DisplayFor(modelItem => item.TimeSlot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberCartons)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadCube)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MbolNbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadNbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarrierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerState)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadComments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadScheduler)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinishTime)
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
 
-<table id="schedule" class="table table-bordered table-striped w-auto">
-    <thead>
-        <tr>
-            <th><h4>Date</h4></th>
-            <th><h4>Time Slot</h4></th>
-            <th><h4>Status</h4></th>
-            <th><h4>Type</h4></th>
-            <th><h4># Cartons</h4></th>
-            <th><h4>Cube</h4></th>
-            <th><h4>MBOL #</h4></th>
-            <th><h4>Load #</h4></th>
-            <th><h4>Loader Name</h4></th>
-            <th><h4>Carrier Name</h4></th>
-            <th><h4>Customer Name</h4></th>
-            <th><h4>City</h4></th>
-            <th><h4>State</h4></th>
-            <th><h4>Comments</h4></th>
-            <th><h4>Scheduler</h4></th>
-            <th>Location</th>
-            <th>Start Time</th>
-            <th>Finish Time</th>
-            <th><h4>Actions</h4></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Data) {
-        <tr>
-            <td class="fit">
-                @Html.DisplayFor(modelItem => item.ScheduleDate)
-            </td>
-            <td class="fit">
-                @Html.DisplayFor(modelItem => item.TimeSlot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberCartons)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadCube)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MbolNbr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadNbr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarrierName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadComments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadScheduler)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FinishTime)
-            </td>
-            <td class="fit">
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                @*<a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 
