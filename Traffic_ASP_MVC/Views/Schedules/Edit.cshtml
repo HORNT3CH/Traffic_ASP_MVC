@@ -21,8 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="TimeSlot" class="control-label">Time Slot</label>
-                    @Html.DropDownListFor(n => n.TimeSlot, ViewBag.TimeSlot as SelectList, "Select Time Slot" , new {@class="form-control"})
-                    <span asp-validation-for="TimeSlot" class="text-danger"></span>
+                    <input asp-for="TimeSlot" class="form-control" readonly />
                 </div>
                 <div class="form-group">
                     <label asp-for="Status" class="control-label">Status</label>
@@ -107,11 +106,6 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="Location" class="control-label">Location</label>
-                    @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})
-                    <span asp-validation-for="Location" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="StartTime" class="control-label">Loader Name</label>
                     <input id="startTime" asp-for="StartTime" class="form-control"/>
                     <a id="start" class="btn btn-success">Set Start</a>
@@ -124,8 +118,18 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
+                    <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Location" class="control-label">Location</label>
+                    @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group mt-3 d-flex flex-column justify-content-end">
                     <input type="submit" value="Save" class="btn btn-primary" />
@@ -133,6 +137,15 @@
                     <a class="btn btn-warning" asp-action="Index">Back to List</a>
                 </div>
             </div>            
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <a class="btn btn-secondary">Live to Dock</a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-secondary">Spot to Dock</a>
+            </div>
+            <div class="col-md-3"></div>
         </div>
     </form>
 </div>

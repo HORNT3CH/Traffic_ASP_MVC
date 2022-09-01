@@ -92,7 +92,7 @@ namespace Traffic_ASP_MVC.Controllers
             ViewBag.TimeSlot = new SelectList(_context.TimeSlots.ToList().OrderBy(x => x.Id), "SlotName", "SlotName");
             ViewBag.City = new SelectList(_context.Cities.ToList().OrderBy(x => x.CityName), "CityName", "CityName");
             ViewBag.State = new SelectList(_context.States.ToList().OrderBy(x => x.StateName), "StateName", "StateName");
-            ViewBag.Doors = new SelectList(_context.Doors.ToList().Where(y => y.Status == "Open").OrderBy(x => x.Location), "Location", "Location");
+            ViewBag.Doors = new SelectList(_context.Doors.ToList().Where(y => y.Status == "Open" && y.Type == "Door").OrderBy(x => x.Location), "Location", "Location");
             if (id == null || _context.Schedule == null)
             {
                 return NotFound();

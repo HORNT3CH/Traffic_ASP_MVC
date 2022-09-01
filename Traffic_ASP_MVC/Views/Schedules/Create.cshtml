@@ -14,13 +14,13 @@
             <div class="col-md-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="ScheduleDate" class="control-label">Date</label>
+                    <label asp-for="ScheduleDate" class="control-label">Click to Select Date</label>
                     <input type="text" asp-for="ScheduleDate" readonly class="form-control datepicker" />
                     <span asp-validation-for="ScheduleDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="TimeSlot" class="control-label">Time Slot</label>
-                    @Html.DropDownListFor(n => n.TimeSlot, ViewBag.TimeSlot as SelectList, "Select Time Slot" , new {@class="form-control"})
+                    @Html.DropDownListFor(n => n.TimeSlot, ViewBag.TimeSlot as SelectList, "Select Time Slot" , new {@class="form-control" })
                     <span asp-validation-for="TimeSlot" class="text-danger"></span>
                 </div>
                 <div class="form-group">

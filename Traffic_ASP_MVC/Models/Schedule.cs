@@ -42,5 +42,7 @@ namespace Traffic_ASP_MVC.Models
         public DateTime? StartTime { get; set; }
 
         public DateTime? FinishTime { get; set; }
+
+        public string? TrailerNbr { get; set; }
     }
 }

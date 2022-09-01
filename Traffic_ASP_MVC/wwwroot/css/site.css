@@ -26,3 +26,12 @@ body {
 .card {
     min-height: 120px;
 }
+
+.table {
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.titleFixed {
+    background-color: #fff;
+}

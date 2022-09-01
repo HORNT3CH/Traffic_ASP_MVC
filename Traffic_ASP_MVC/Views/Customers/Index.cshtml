@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "Customers";
 }
-
-<h1>Customers</h1>
-<div>
-    <a class="btn btn-primary mt-1" asp-controller="Carriers" asp-action="Create">Create</a>
+<div class="sticky-top titleFixed pb-1">
+    <h1>Customers</h1>
+    <p>
+        <a class="btn btn-primary mt-1" asp-controller="Carriers" asp-action="Create">Create</a>
+    </p>
 </div>
+
 <div class="row justify-content-center">
     <div class="col-auto">
         <table id="customer" class="table table-bordered table-striped w-auto">
