@@ -6,6 +6,6 @@ namespace Traffic_ASP_MVC.ViewModels
     {
         public IEnumerable<Doors>? Doors { get; set; }
 
-        public Doors? location { get; set; }
+        public Doors? Location { get; set; }
     }
 }

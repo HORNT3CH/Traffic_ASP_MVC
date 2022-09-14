@@ -29,5 +29,6 @@ namespace Traffic_ASP_MVC.Data
         public DbSet<Traffic_ASP_MVC.Models.States> States { get; set; } = default!;
 
         public DbSet<Traffic_ASP_MVC.Models.Doors> Doors { get; set; } = default!;
+
     }
 }

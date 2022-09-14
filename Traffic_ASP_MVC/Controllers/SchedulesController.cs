@@ -111,7 +111,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime")] Schedule schedule)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime,TrailerNbr")] Schedule schedule)
         {
             if (id != schedule.ID)
             {
