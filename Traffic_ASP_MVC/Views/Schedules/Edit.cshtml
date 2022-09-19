@@ -127,8 +127,16 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="Location" class="control-label">Location</label>
-                    @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})
+                    @if (Model.Status == "At Dock")
+                    {
+                        <label asp-for="Location" class="control-label">Location</label>
+                        <input asp-for="Location" class="form-control" value=@Model.Location />
+                    }
+                    else
+                    {
+                        @Html.LabelFor(n => n.Location, new {@class="control-label"})
+                        @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})                           <span asp-validation-for="Location" class="text-danger"></span>
+                    }
                 </div>
             </div>
             <div class="col-md-3">

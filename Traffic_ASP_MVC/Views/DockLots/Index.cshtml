@@ -9,6 +9,52 @@
     <p>
         <a class="btn btn-primary" asp-action="Create">Create New</a>
     </p>
+
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col">
+            <div class="form-group">
+                    <label class="control-label">Status</label>
+                    <select id="trailerStatus" class="form-control">
+                        <option value="">Select Status</option>
+                        <option value="Empty">Empty</option>
+                        <option value="Full/InComp">Full/InComp</option>
+                        <option value="Full/InFinished">Full/InFinished</option>
+                        <option value="Full/InMixed">Full/InMixed</option>
+                        <option value="Full/OutComp">Full/OutComp</option>
+                        <option value="Full/OutFinished">Full/OutFinished</option>
+                        <option value="Full/OutMixed">Full/OutMixed</option>
+                        <option value="Reserved">Reserved</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Shuttle">Shuttle</option>
+                        <option value="Load In Process">Load In Process</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+                    <label class="control-label">Dimension</label>
+                    <select id="trailerSize" class="form-control">
+                        <option value="">Select Dimension</option>
+                        <option value="20-LC">20-LC</option>
+                        <option value="40-HC">40-HC</option>
+                        <option value="40-ST">40-ST</option>
+                        <option value="45-FT">45-FT</option>
+                        <option value="48-FT">48-FT</option>
+                        <option value="53-FT">53-FT</option>
+                        <option value="PUP">PUP</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+    </div>
 </div>
 
 <table id="docklot" class="table table-bordered table-striped w-auto">

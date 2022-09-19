@@ -151,13 +151,25 @@
     $(document).ready(function() {
         $('#loadStatusSel').change(function() {
             var strType = $('#loadStatusSel').val();
-            $('.form-control-sm').val(strType).focus();
+            $('.form-control-sm').val(strType);
         });
     });
     $(document).ready(function() {
         $('#loadTypeSel').change(function() {
             var strType = $('#loadTypeSel').val();
-            $('.form-control-sm').val(strType).focus();
+            $('.form-control-sm').val(strType);
+        });
+    });
+    $(document).ready(function() {
+        $('#trailerStatus').change(function() {
+            var strType = $('#trailerStatus').val();
+            $('.form-control-sm').val(strType);
+        });
+    });
+    $(document).ready(function() {
+        $('#trailerSize').change(function() {
+            var strType = $('#trailerSize').val();
+            $('.form-control-sm').val(strType);
         });
     });
     $(document).ready(function() {
