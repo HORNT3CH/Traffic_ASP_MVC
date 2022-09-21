@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Traffic_ASP_MVC.Data;
 
@@ -11,9 +12,10 @@ using Traffic_ASP_MVC.Data;
 namespace Traffic_ASP_MVC.Migrations
 {
     [DbContext(typeof(Traffic_Schedule_Context))]
-    partial class Traffic_Schedule_ContextModelSnapshot : ModelSnapshot
+    [Migration("20220921143814_AddedStageLocation")]
+    partial class AddedStageLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

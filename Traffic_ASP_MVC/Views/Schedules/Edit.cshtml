@@ -64,9 +64,18 @@
                     <span asp-validation-for="LoadNbr" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LoaderName" class="control-label">Loader Name</label>
-                    <input asp-for="LoaderName" class="form-control" />
-                    <span asp-validation-for="LoaderName" class="text-danger"></span>
+                    @if (Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null)
+                    {
+                        <label asp-for="LoaderName" class="control-label">Enter Name</label>
+                        <input asp-for="LoaderName" class="form-control is-invalid" />
+                        <span asp-validation-for="LoaderName" class="text-danger"></span>
+                    }
+                    else 
+                    {
+                        <label asp-for="LoaderName" class="control-label">Loader Name</label>
+                        <input asp-for="LoaderName" class="form-control" />
+                        <span asp-validation-for="LoaderName" class="text-danger"></span>
+                    }
                 </div>
             </div>
         </div>    
@@ -107,22 +116,48 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="StartTime" class="control-label">Loader Name</label>
-                    <input id="startTime" asp-for="StartTime" class="form-control"/>
-                    <a id="start" class="btn btn-success">Set Start</a>
+                    @if (Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null)
+                    {
+                        <label asp-for="StartTime" class="control-label text-danger">Start Time</label>
+                        <input id="startTime" asp-for="StartTime" class="form-control is-invalid"/>
+                        <a id="start" class="btn btn-success">Set Start</a>   
+                    }
+                    else
+                    {
+                        <label asp-for="StartTime" class="control-label">Start Time</label>
+                        <input id="startTime" asp-for="StartTime" class="form-control"/>
+                        <a id="start" class="btn btn-success">Set Start</a>
+                    }
                 </div>
                 <div class="form-group">
-                    <label asp-for="FinishTime" class="control-label">Finish Time</label>
-                    <input id="finishTime" asp-for="FinishTime" class="form-control"/>
-                    <a id="finish" class="btn btn-danger">Set Finish</a>
+                    @if (Model.Status != null && Model.LoaderName != null && Model.FinishTime == null)
+                    {
+                        <label asp-for="FinishTime" class="control-label">Finish Time</label>
+                        <input id="finishTime" asp-for="FinishTime" class="form-control is-invalid"/>
+                        <a id="finish" class="btn btn-danger">Set Finish</a>   
+                    }
+                    else
+                    {
+                        <label asp-for="FinishTime" class="control-label">Finish Time</label>
+                        <input id="finishTime" asp-for="FinishTime" class="form-control"/>
+                        <a id="finish" class="btn btn-danger">Set Finish</a>
+                    }
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
-                    <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>
+                    @if (Model.Type == "Spot")
+                    {
+                        <label asp-for="TrailerNbr" class="control-label">Select Spot Trailer</label>
+                        <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" disabled/>
+                    }
+                    else
+                    {
+                        <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
+                        <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>   
+                    }
                 </div>
             </div>
             <div class="col-md-3">
@@ -140,16 +175,20 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="form-group mt-3 d-flex flex-column justify-content-end">
-                    <input type="submit" value="Save" class="btn btn-primary"/>
-                    <br />
-                    <a class="btn btn-warning" asp-action="Index">Back to List</a>
+                <div class="form-group">
+                    <label asp-for="StageLocation" class="control-label">Stage Location</label>
+                    <input asp-for="StageLocation" class="form-control" />
+                    <span asp-validation-for="StageLocation" class="text-danger"></span>
                 </div>
             </div>            
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
-
+                <div class="form-group mt-3 d-flex flex-column justify-content-end">
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                    <br />
+                    <a class="btn btn-warning" asp-action="Index">Back to List</a>
+                </div>
             </div>
             <div class="col-md-3">
                 

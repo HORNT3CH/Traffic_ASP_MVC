@@ -11,11 +11,11 @@
     </p>
 
     <div class="container text-center">
-      <div class="row">
-        <div class="col">
+      <div class="row justify-content-center">
+        <div class="col-md-3">
 
         </div>
-        <div class="col">
+        <div class="col-md-3">
             <div class="form-group">
                     <label class="control-label">Status</label>
                     <select id="trailerStatus" class="form-control">
@@ -35,7 +35,7 @@
                     <span class="text-danger"></span>
                 </div>
         </div>
-        <div class="col">
+        <div class="col-md-3">
           <div class="form-group">
                     <label class="control-label">Dimension</label>
                     <select id="trailerSize" class="form-control">
@@ -51,8 +51,6 @@
                     <span class="text-danger"></span>
                 </div>
         </div>
-        <div class="col"></div>
-        <div class="col"></div>
       </div>
     </div>
 </div>
@@ -77,7 +75,7 @@
         <tr>
             <td>
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                @*<a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>*@
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
                 @*<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
             </td>
             <td>
