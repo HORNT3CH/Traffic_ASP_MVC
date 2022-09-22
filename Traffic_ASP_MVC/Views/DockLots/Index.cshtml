@@ -3,20 +3,22 @@
 @{
     ViewData["Title"] = "Dock / Lot";
 }
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="alert" class="alert alert-success position-relative">
+        <div id="close" class="position-absolute fixed-top">X</div>
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
 <div class="sticky-top titleFixed pb-1">
-    <h1>Dock / Lot</h1>
-
-    <p>
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
-    </p>
-
-    <div class="container text-center">
-      <div class="row justify-content-center">
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
+    <div class="container">
+        <h1>Dock / Lot</h1>
+        <div class="row">
+            <div class="col-md-3">
+                              
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
                     <label class="control-label">Status</label>
                     <select id="trailerStatus" class="form-control">
                         <option value="">Select Status</option>
@@ -34,78 +36,86 @@
                     </select>
                     <span class="text-danger"></span>
                 </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-                    <label class="control-label">Dimension</label>
-                    <select id="trailerSize" class="form-control">
-                        <option value="">Select Dimension</option>
-                        <option value="20-LC">20-LC</option>
-                        <option value="40-HC">40-HC</option>
-                        <option value="40-ST">40-ST</option>
-                        <option value="45-FT">45-FT</option>
-                        <option value="48-FT">48-FT</option>
-                        <option value="53-FT">53-FT</option>
-                        <option value="PUP">PUP</option>
-                    </select>
-                    <span class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                        <label class="control-label">Dimension</label>
+                        <select id="trailerSize" class="form-control">
+                            <option value="">Select Dimension</option>
+                            <option value="20-LC">20-LC</option>
+                            <option value="40-HC">40-HC</option>
+                            <option value="40-ST">40-ST</option>
+                            <option value="45-FT">45-FT</option>
+                            <option value="48-FT">48-FT</option>
+                            <option value="53-FT">53-FT</option>
+                            <option value="PUP">PUP</option>
+                        </select>
+                        <span class="text-danger"></span>
                 </div>
+            </div>
         </div>
-      </div>
     </div>
 </div>
-
-<table id="docklot" class="table table-bordered table-striped w-auto">
-    <thead>
-        <tr>
-            <th><h4>Action Buttons</h4></th>
-            <th><h4>Location</h4></th>
-            <th><h4>Carrier Name</h4></th>
-            <th><h4>Trailer Status</h4></th>
-            <th><h4>Trailer Number</h4></th>
-            <th><h4>Dimension</h4></th>
-            <th><h4>Trailer Comments</h4></th>
-            <th><h4>Load Number</h4></th>
-            <th><h4>MBOL Number</h4></th>
-            <th><h4>Created</h4></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Data) {
-        <tr>
-            <td>
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                @*<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarrierName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrailerNbr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dimension)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadNbr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MbolNbr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeStamp)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid table-responsive">
+    <table id="docklot" class="table table-bordered table-striped w-auto">
+        <thead>
+            <tr>
+                <th><p>Action Buttons</p></th>
+                <th><p>Location</p></th>
+                <th><p>Carrier Name</p></th>
+                <th><p>Trailer Status</p></th>
+                <th><p>Trailer Number</p></th>
+                <th><p>Dimension</p></th>
+                <th><p>Trailer Comments</p></th>
+                <th><p>Load Number</p></th>
+                <th><p>MBOL Number</p></th>
+                <th><p>Created</p></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Data) {
+            <tr>
+                <td>
+                        @if (item.Location == "Exit")
+                        {
+                            <div></div>   
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>    
+                        }                    
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    @*<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarrierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrailerNbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dimension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadNbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MbolNbr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeStamp)
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>

@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Coordinators";
 }
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="alert" class="alert alert-success position-relative">
+        <div id="close" class="position-absolute fixed-top">X</div>
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
 <div class="sticky-top titleFixed pb-1">
     <h1>Coordinators</h1>
 

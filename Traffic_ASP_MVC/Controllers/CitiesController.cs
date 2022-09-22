@@ -72,6 +72,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(cities);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "City " + cities.CityName + " Was Added Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(cities);
@@ -123,6 +124,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "City " + cities.CityName + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(cities);
@@ -162,6 +164,7 @@ namespace Traffic_ASP_MVC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "City Was Deleted Successfully...!";
             return RedirectToAction(nameof(Index));
         }
 

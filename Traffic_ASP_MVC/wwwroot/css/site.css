@@ -14,9 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
-
 .table td.fit,
 .table th.fit {
     white-space: nowrap;
@@ -28,10 +27,41 @@ body {
 }
 
 .table {
-    font-size: 16px;
+    font-size: 14px;
     white-space: nowrap;
+}
+
+.table th {
+    font-size: 16px;
+}
+
+#schedule tr {
+    line-height: 6px;
+    min-height: 14px;
+    height: 14px;
+    vertical-align: baseline;
+}
+
+#docklot tr {
+    line-height: 6px;
+    min-height: 14px;
+    height: 14px;
+    vertical-align: baseline;
 }
 
 .titleFixed {
     background-color: #fff;
+}
+
+#alert {
+    width: 700px;
+}
+
+#close {
+    width: 2px;
+    padding-left: 5px;
+}
+
+#close:hover {
+    cursor: pointer;
 }

@@ -74,6 +74,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(carriers);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Carrier " + carriers.CarrierName + " Was Added Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(carriers);
@@ -125,6 +126,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "Carrier " + carriers.CarrierName + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(carriers);
@@ -164,6 +166,7 @@ namespace Traffic_ASP_MVC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Carrier Was Deleted Successfully...!";
             return RedirectToAction(nameof(Index));
         }
 

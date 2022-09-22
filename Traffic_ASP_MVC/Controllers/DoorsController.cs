@@ -67,12 +67,13 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Location,Status")] Doors doors)
+        public async Task<IActionResult> Create([Bind("ID,Location,Status,Type")] Doors doors)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(doors);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Location " + doors.Location + " Was Added Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(doors);
@@ -99,7 +100,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Location,Status")] Doors doors)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Location,Status,Type")] Doors doors)
         {
             if (id != doors.ID)
             {
@@ -124,6 +125,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "Location " + doors.Location + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(doors);
@@ -163,6 +165,7 @@ namespace Traffic_ASP_MVC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Location Was Deleted Successfully...!";
             return RedirectToAction(nameof(Index));
         }
 

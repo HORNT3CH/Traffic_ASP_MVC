@@ -78,6 +78,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(schedule);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " Was Scheduled On " + schedule.ScheduleDate.ToShortDateString() + " At " + schedule.TimeSlot + "!";
                 return RedirectToAction(nameof(Index));
             }
             return View(schedule);
@@ -136,6 +137,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(schedule);

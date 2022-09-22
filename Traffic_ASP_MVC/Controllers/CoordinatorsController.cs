@@ -72,6 +72,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(coordinators);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Coordinator " + coordinators.CoordinatorName + " Was Added Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(coordinators);
@@ -123,6 +124,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "Coordinator " + coordinators.CoordinatorName + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(coordinators);
@@ -162,6 +164,7 @@ namespace Traffic_ASP_MVC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Coordinator Was Deleted Successfully...!";
             return RedirectToAction(nameof(Index));
         }
 

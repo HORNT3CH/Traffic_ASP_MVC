@@ -22,7 +22,7 @@ namespace Traffic_ASP_MVC.Controllers
         public async Task<IActionResult> Index(int pageNumber=1, int pageSize=1000)
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
-
+            
             var theDockLot = _context.DockLot.Skip(ExcludeRecords).Take(pageSize).OrderBy(x => x.CarrierName);
             
             var result = new PagedResult<DockLot>
@@ -50,7 +50,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.Doors = new SelectList(_context.Doors.ToList().Where(y => y.Status == "Open").OrderBy(x => x.Location), "Location", "Location");
             return View(dockLot);
         }
 
@@ -73,6 +73,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(dockLot);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Trailer " + dockLot.TrailerNbr + " Was Added To " + dockLot.Location + "!";
                 return RedirectToAction(nameof(Index));
             }
             return View(dockLot);
@@ -113,6 +114,7 @@ namespace Traffic_ASP_MVC.Controllers
                 try
                 {
                     _context.Update(dockLot);
+                    TempData["AlertMessage"] = "Trailer " + dockLot.TrailerNbr + " Was Updated Successfully...!";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

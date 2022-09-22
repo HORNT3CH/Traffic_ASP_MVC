@@ -73,6 +73,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(customers);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Customer " + customers.CustomerName + " Was Added Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(customers);
@@ -124,6 +125,7 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
+                TempData["AlertMessage"] = "Customer " + customers.CustomerName + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(customers);
@@ -163,6 +165,7 @@ namespace Traffic_ASP_MVC.Controllers
             }
             
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Customer Was Deleted Successfully...!";
             return RedirectToAction(nameof(Index));
         }
 

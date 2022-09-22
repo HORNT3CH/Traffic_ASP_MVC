@@ -97,13 +97,13 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid mt-5">
-        <main role="main" class="overflow-auto" style="height: 85vh;">
+    <div class="container-fluid mt-1">
+        <main role="main" class="overflow-auto" style="height: 85vh; width: 100%;">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-light bg-primary text-center">
+    <footer class="border-top footer fixed-bottom text-light bg-primary text-center">
         
             &copy; 2022 - Traffic | MGA Entertainment<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         
@@ -211,6 +211,11 @@
             })
             $('#finishTime').val(output);
             console.log(output);
+        });
+    });
+    $(document).ready(function() {
+        $('#close').on('click', function() {
+            $(this).closest('.alert').hide();
         });
     });
     </script>
