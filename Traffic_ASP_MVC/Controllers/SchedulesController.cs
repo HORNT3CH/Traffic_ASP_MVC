@@ -19,7 +19,7 @@ namespace Traffic_ASP_MVC.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int pageNumber=1, int pageSize=1000)
+        public async Task<IActionResult> Index(int pageNumber=1, int pageSize=5000)
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
 
@@ -140,6 +140,13 @@ namespace Traffic_ASP_MVC.Controllers
                 TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " Was Updated Successfully...!";
                 return RedirectToAction(nameof(Index));
             }
+            return View(schedule);
+        }
+
+        public async Task<IActionResult> StageSheet(int? id)
+        {
+
+            var schedule = await _context.Schedule.FindAsync(id);
             return View(schedule);
         }
 

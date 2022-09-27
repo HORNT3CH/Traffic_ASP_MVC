@@ -1,0 +1,34 @@
+﻿@model Traffic_ASP_MVC.Models.Schedule
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Stage Sheet</title>
+</head>
+<body>
+<div class="text-center">
+    <h1 class="display-1">STAGED LOAD</h1>
+    <h4 class="display-4">@Model.CarrierName</h4>
+</div>
+<hr />
+<div class="text-center">
+    <h2>Load Number  <span class="border border-dark border-4 p-1">@Model.MbolNbr</span></h2>
+    <br />
+    <h2>Stage Location <span class="border border-dark border-4 p-1">@Model.StageLocation</span></h2>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>
