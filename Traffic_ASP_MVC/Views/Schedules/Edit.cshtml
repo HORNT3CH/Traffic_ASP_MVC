@@ -4,205 +4,301 @@
     ViewData["Title"] = "Edit";
 }
 
+<!-- BEGIN POP-UP MESSAGE AREA -->
+<div class="submit-progress hidden">
+    <i class="fa fa-2x fa-spinner fa-spin"></i>
+    <label>Please wait while Saving Data...</label>
+</div>
+
+
 <h1>Edit</h1>
 
 <h4>Schedule</h4>
 <hr />
 <div class="container">
     <form asp-action="Edit">
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="ID" />
-                <div class="form-group">
-                    <label asp-for="ScheduleDate" class="control-label">Date</label>
-                    <input type="text" asp-for="ScheduleDate" class="form-control datepicker" value=@Model.ScheduleDate.ToShortDateString() readonly/>
-                    <span asp-validation-for="ScheduleDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TimeSlot" class="control-label">Time Slot</label>
-                    <input asp-for="TimeSlot" class="form-control" value=@Model.TimeSlot readonly />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Status" class="control-label">Status</label>
-                    <select asp-for="Status" class="form-control">
-                        <option value="">Select Status</option>
-                        <option value="Created">Created</option>
-                        <option value="At Dock">At Dock</option>
-                        <option value="Staged">Staged</option>
-                        <option value="Loaded">Loaded</option>
-                    </select>
-                    <span asp-validation-for="Status" class="text-danger"></span>
+        <div class="row row-cols-4">
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+
+                        <!-- LOAD INFO SECTION -->
+
+                        <h4 class="text-center">LOAD INFO</h4>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="ID" />
+                        <div class="form-group">
+                            <label asp-for="ScheduleDate" class="control-label">Date</label>
+                            <input type="text" asp-for="ScheduleDate" class="form-control datepicker" value=@Model.ScheduleDate.ToShortDateString() readonly/>
+                            <span asp-validation-for="ScheduleDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TimeSlot" class="control-label">Time Slot</label>
+                            <input asp-for="TimeSlot" class="form-control" value=@Model.TimeSlot readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CarrierName" class="control-label">Carrier Name</label>
+                            @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
+                            <span asp-validation-for="CarrierName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerName" class="control-label">Customer Name</label>
+                            <input asp-for="CustomerName" class="form-control" value=@Model.CustomerName readonly/>
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerCity" class="control-label">City Name</label>
+                            <input asp-for="CustomerCity" class="form-control" value=@Model.CustomerCity readonly/>
+                            <span asp-validation-for="CustomerCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerState" class="control-label">State Name</label>
+                            <input asp-for="CustomerState" class="form-control" value=@Model.CustomerState readonly/>
+                            <span asp-validation-for="CustomerState" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberCartons" class="control-label"># Cartons</label>
+                            <input asp-for="NumberCartons" class="form-control" value=@Model.NumberCartons readonly/>
+                            <span asp-validation-for="NumberCartons" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadCube" class="control-label">Cube</label>
+                            <input asp-for="LoadCube" class="form-control" value=@Model.LoadCube readonly/>
+                            <span asp-validation-for="LoadCube" class="text-danger"></span>
+                        </div>                        
+                        <hr />
+                    </div>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+
+                        <!-- LOAD INFO CONTINUED SECTION -->
+
+                        <h4 class="text-center">LOAD INFO CONTINUED</h4>
+                        <div class="form-group">
+                            <label asp-for="LoadComments" class="control-label">Comments</label>
+                            <input asp-for="LoadComments" class="form-control" />
+                            <span asp-validation-for="LoadComments" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadScheduler" class="control-label">Scheduler</label>
+                            <input asp-for="LoadScheduler" class="form-control" value=@Model.LoadScheduler readonly/>
+                            <span asp-validation-for="LoadScheduler" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MbolNbr" class="control-label">MBOL #</label>
+                            <input asp-for="MbolNbr" class="form-control" value=@Model.MbolNbr readonly/>
+                            <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadNbr" class="control-label">Load #</label>
+                            <input asp-for="LoadNbr" class="form-control" value=@Model.LoadNbr readonly />
+                            <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label asp-for="Status" class="control-label">Status</label>
+                            <select asp-for="Status" class="form-control">
+                                <option value="">Select Status</option>
+                                <option value="Created">Created</option>
+                                <option value="At Dock">At Dock</option>
+                                <option value="Staged">Staged</option>
+                                <option value="Loaded">Loaded</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Type" class="control-label">Type</label>
+                            <select asp-for="Type" class="form-control">
+                                <option value="">Select Type</option>
+                                <option value="Live">Live</option>
+                                <option value="Spot">Spot</option>
+                            </select>
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>                        
+                        <hr />
+                        <div class="form-group">
+                            @if (Model.Type == "Spot")
+                            {
+                                <label asp-for="TrailerNbr" class="control-label">Select Spot Trailer</label>
+                                <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" disabled />
+                            }
+                            else
+                            {
+                                <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
+                                <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>   
+                            }
+                        </div>
+                        <div class="form-group">
+                            @if (Model.Status == "At Dock")
+                            {
+                                <label asp-for="Location" class="control-label">Location</label>
+                                <input asp-for="Location" class="form-control" value=@Model.Location />
+                            }
+                            else
+                            {
+                                @Html.LabelFor(n => n.Location, new {@class="control-label"})
+                                @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})                                             <span asp-validation-for="Location" class="text-danger"></span>
+                            }
+                        </div>
+                        <hr />
+                    </div>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+
+                        <!-- STAGING SECTION -->
+
+                        <h4 class="text-center">STAGING</h4>
+                        <div class="form-group">                            
+                            <label asp-for="StagerName" class="control-label">Stager Name</label>
+                            <input asp-for="StagerName" class="form-control" />
+                            <span asp-validation-for="StagerName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">                            
+                            <label asp-for="StageStartTime" class="control-label">Start Time</label>
+                            <input id="stageStartTime" asp-for="StageStartTime" class="form-control"/>
+                            @if (Model.StageStartTime != null)
+                            {
+                                <a id="stageStart" class="btn btn-success mt-1 disabled" role="button" aria-disabled="true">Set Start</a>
+                            }
+                            else 
+                            {
+                                <a id="stageStart" class="btn btn-success mt-1" role="button" aria-disabled="false">Set Start</a>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StageFinishTime" class="control-label">Finish Time</label>
+                            <input id="stageFinishTime" asp-for="StageFinishTime" class="form-control"/>
+                            @if (Model.StageFinishTime != null)
+                            {
+                                <a id="stageFinish" class="btn btn-danger disabled" role="button" aria-disabled="true">Set Finish</a>
+                            }
+                            else
+                            {
+                                <a id="stageFinish" class="btn btn-danger" role="button" aria-disabled="false">Set Finish</a>    
+                            }
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label asp-for="StageLocation" class="control-label">Stage Location</label>
+                            <input asp-for="StageLocation" class="form-control" />
+                            <span asp-validation-for="StageLocation" class="text-danger"></span>
+                        </div>
+                        <hr />
+                    </div>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">   
+
+                        <!-- LOADING SECTION -->
+
+                        <h4 class="text-center">LOADING</h4> 
+                        <div class="form-group">                            
+                            <label asp-for="LoaderName" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Loader Name</label>
+                            <input asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
+                            <span asp-validation-for="LoaderName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartTime" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Start Time</label>
+                            <input id="loadStartTime" asp-for="StartTime" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
+                            @if (Model.StartTime != null)
+                            {
+                                <a id="loadStart" class="btn btn-success mt-1 disabled" role="button" aria-disabled="true">Set Start</a>
+                            }   
+                            else
+                            {
+                                <a id="loadStart" class="btn btn-success mt-1" role="button" aria-disabled="false">Set Start</a>    
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FinishTime" class="control-label @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "text-danger" : null)">Finish Time</label>
+                            <input id="loadFinishTime" asp-for="FinishTime" class="form-control @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "border-danger" : null)"/>
+                            @if (Model.FinishTime != null)
+                            {
+                                <a id="loadFinish" class="btn btn-danger mt-1 disabled" role="button" aria-disabled="true">Set Finish</a>
+                            }
+                            else 
+                            {
+                                <a id="loadFinish" class="btn btn-danger mt-1" role="button" aria-disabled="false">Set Finish</a>
+                            }
+                        </div>
+                        <hr />
+                        <div class="form-group mt-3 d-flex flex-column justify-content-end">
+                            <input type="submit" onclick="return DisplayProgressMessage(this, 'Saving...')" value="Save" class="btn btn-primary"/>
+                            <br />
+                            <a class="btn btn-warning" asp-action="Index">Back to List</a>
+                        </div>
+                        <hr />
+                    </div>                    
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="Type" class="control-label">Type</label>
-                    <select asp-for="Type" class="form-control">
-                        <option value="">Select Type</option>
-                        <option value="Live">Live</option>
-                        <option value="Spot">Spot</option>
-                    </select>
-                    <span asp-validation-for="Type" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NumberCartons" class="control-label"># Cartons</label>
-                    <input asp-for="NumberCartons" class="form-control" value=@Model.NumberCartons readonly/>
-                    <span asp-validation-for="NumberCartons" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadCube" class="control-label">Cube</label>
-                    <input asp-for="LoadCube" class="form-control" value=@Model.LoadCube readonly/>
-                    <span asp-validation-for="LoadCube" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="MbolNbr" class="control-label">MBOL #</label>
-                    <input asp-for="MbolNbr" class="form-control" value=@Model.MbolNbr readonly/>
-                    <span asp-validation-for="MbolNbr" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadNbr" class="control-label">Load #</label>
-                    <input asp-for="LoadNbr" class="form-control" value=@Model.LoadNbr readonly />
-                    <span asp-validation-for="LoadNbr" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @if (Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null)
-                    {
-                        <label asp-for="LoaderName" class="control-label">Enter Name</label>
-                        <input asp-for="LoaderName" class="form-control is-invalid" />
-                        <span asp-validation-for="LoaderName" class="text-danger"></span>
-                    }
-                    else 
-                    {
-                        <label asp-for="LoaderName" class="control-label">Loader Name</label>
-                        <input asp-for="LoaderName" class="form-control" />
-                        <span asp-validation-for="LoaderName" class="text-danger"></span>
-                    }
-                </div>
-            </div>
-        </div>    
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="CarrierName" class="control-label">Carrier Name</label>
-                    @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
-                    <span asp-validation-for="CarrierName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CustomerName" class="control-label">Customer Name</label>
-                    <input asp-for="CustomerName" class="form-control" value=@Model.CustomerName readonly/>
-                    <span asp-validation-for="CustomerName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CustomerCity" class="control-label">City Name</label>
-                    <input asp-for="CustomerCity" class="form-control" value=@Model.CustomerCity readonly/>
-                    <span asp-validation-for="CustomerCity" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="CustomerState" class="control-label">State Name</label>
-                    <input asp-for="CustomerState" class="form-control" value=@Model.CustomerState readonly/>
-                    <span asp-validation-for="CustomerState" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadComments" class="control-label">Comments</label>
-                    <input asp-for="LoadComments" class="form-control" />
-                    <span asp-validation-for="LoadComments" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadScheduler" class="control-label">Scheduler</label>
-                    <input asp-for="LoadScheduler" class="form-control" value=@Model.LoadScheduler readonly/>
-                    <span asp-validation-for="LoadScheduler" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    @if (Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null)
-                    {
-                        <label asp-for="StartTime" class="control-label text-danger">Start Time</label>
-                        <input id="startTime" asp-for="StartTime" class="form-control is-invalid"/>
-                        <a id="start" class="btn btn-success">Set Start</a>   
-                    }
-                    else
-                    {
-                        <label asp-for="StartTime" class="control-label">Start Time</label>
-                        <input id="startTime" asp-for="StartTime" class="form-control"/>
-                        <a id="start" class="btn btn-success">Set Start</a>
-                    }
-                </div>
-                <div class="form-group">
-                    @if (Model.Status != null && Model.LoaderName != null && Model.FinishTime == null)
-                    {
-                        <label asp-for="FinishTime" class="control-label">Finish Time</label>
-                        <input id="finishTime" asp-for="FinishTime" class="form-control is-invalid"/>
-                        <a id="finish" class="btn btn-danger">Set Finish</a>   
-                    }
-                    else
-                    {
-                        <label asp-for="FinishTime" class="control-label">Finish Time</label>
-                        <input id="finishTime" asp-for="FinishTime" class="form-control"/>
-                        <a id="finish" class="btn btn-danger">Set Finish</a>
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="form-group">
-                    @if (Model.Type == "Spot")
-                    {
-                        <label asp-for="TrailerNbr" class="control-label">Select Spot Trailer</label>
-                        <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" disabled/>
-                    }
-                    else
-                    {
-                        <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
-                        <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>   
-                    }
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    @if (Model.Status == "At Dock")
-                    {
-                        <label asp-for="Location" class="control-label">Location</label>
-                        <input asp-for="Location" class="form-control" value=@Model.Location />
-                    }
-                    else
-                    {
-                        @Html.LabelFor(n => n.Location, new {@class="control-label"})
-                        @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})                           <span asp-validation-for="Location" class="text-danger"></span>
-                    }
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="StageLocation" class="control-label">Stage Location</label>
-                    <input asp-for="StageLocation" class="form-control" />
-                    <span asp-validation-for="StageLocation" class="text-danger"></span>
-                </div>
-            </div>            
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="form-group mt-3 d-flex flex-column justify-content-end">
-                    <input type="submit" value="Save" class="btn btn-primary"/>
-                    <br />
-                    <a class="btn btn-warning" asp-action="Index">Back to List</a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                
-            </div>
-            <div class="col-md-3"></div>
-        </div>
+        </div>         
     </form>
 </div>
+ <style>
+   .submit-progress-bg {
+     background-color: lightgray;
+     opacity: .5;
+   }
+    
+   .submit-progress {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     height: 6em;
+     padding-top: 2.3em;
+     z-index: 1;
+     /* The following properties are the ones most likely to change */
+     width: 20em;
+     /* Set 'margin-left' to a negative number that is 1/2 of 'width' */
+     margin-left: -10em;
+     padding-left: 2.1em;
+     background-color: black;
+     color: white;
+     -webkit-border-radius: 0.4em;
+     -moz-border-radius: 0.4em;
+     border-radius: 0.4em;
+     box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+     -webkit-box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+     -moz-box-shadow: 0.4em 0.4em rgba(0,0,0,0.6);
+   }
+    
+   /* Changing style for spinner */
+   .submit-progress {
+     padding-top: 2em;
+     width: 23em;
+     margin-left: -11.5em; /* Set to a negative number that is 1/2 of the width */
+   }
+    
+     .submit-progress i {
+       margin-right: 0.5em;
+     }
+     .hidden{
+         display:none;
+     }
+ </style>
       
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    function DisplayProgressMessage(ctl, msg) {     
+        event.preventDefault();
+        $(ctl).prop("disable", true).text(msg);
+        $("body").addClass("submit-progress-bg");
+        $(".submit-progress").removeClass("hidden");
+        setTimeout(function() {
+            $("form").submit();
+        }, 1);
+        return true;
+    }    
+</script>
+
 }

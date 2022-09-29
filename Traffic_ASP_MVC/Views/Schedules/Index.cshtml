@@ -37,6 +37,9 @@
                 <th><p>Start Time</p></th>
                 <th><p>Finish Time</p></th>
                 <th><p>Stage Location</p></th>
+                <th><p>Stager Name</p></th>
+                <th><p>Stage Start</p></th>
+                <th><p>Stage Finish</p></th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +48,10 @@
                 <td class="fit">
                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
                     <a class="btn btn-warning btn-sm" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                    <a class="btn btn-info btn-sm" asp-action="StageSheet" asp-route-id="@item.ID" target="_blank">Stage Sheet</a>
+                        @if (item.Status != "At Dock")
+                        {
+                            <a class="btn btn-info btn-sm" asp-action="StageSheet" asp-route-id="@item.ID" target="_blank">Stage Sheet</a>    
+                        }
                     @*<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
                 </td>
                 <td class="fit">
@@ -104,6 +110,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StageLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StagerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StageStartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StageFinishTime)
                 </td>
             </tr>
     }

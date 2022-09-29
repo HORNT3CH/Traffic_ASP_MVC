@@ -19,11 +19,11 @@ namespace Traffic_ASP_MVC.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int pageNumber=1, int pageSize=5000)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5000)
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
 
-            var theSchedule = _context.Schedule.Skip(ExcludeRecords).Take(pageSize);
+            var theSchedule = _context.Schedule.Skip(ExcludeRecords).Take(pageSize).Where(y => y.Status != "Loaded");
 
             var result = new PagedResult<Schedule>
             {
@@ -72,7 +72,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime,StageLocation")] Schedule schedule)
+        public async Task<IActionResult> Create([Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime,StageLocation,StageStartTime,StageFinishTime,StagerName")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace Traffic_ASP_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime,TrailerNbr,StageLocation")] Schedule schedule)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ScheduleDate,TimeSlot,Status,Type,NumberCartons,LoadCube,MbolNbr,LoadNbr,LoaderName,CarrierName,CustomerName,CustomerCity,CustomerState,LoadComments,LoadScheduler,Location,StartTime,FinishTime,TrailerNbr,StageLocation,StageStartTime,StageFinishTime,StagerName")] Schedule schedule)
         {
             if (id != schedule.ID)
             {

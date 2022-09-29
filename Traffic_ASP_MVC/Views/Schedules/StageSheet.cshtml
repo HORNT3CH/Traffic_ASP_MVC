@@ -10,25 +10,142 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/StageSheet.css" />
     <title>Stage Sheet</title>
 </head>
 <body>
-<div class="text-center">
-    <h1 class="display-1">STAGED LOAD</h1>
-    <h4 class="display-4">@Model.CarrierName</h4>
-</div>
-<hr />
-<div class="text-center">
-    <h2>Load Number  <span class="border border-dark border-4 p-1">@Model.MbolNbr</span></h2>
-    <br />
-    <h2>Stage Location <span class="border border-dark border-4 p-1">@Model.StageLocation</span></h2>
-</div>
-
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    <div class="container-fluid">
+        <div class="row mb-2 text-center">
+            <div class="col">
+                <img src="~/img/mga_logo.png" alt="MGA LOGO" width="200px" />
+            </div>
+            <div class="col">
+                <h1 class="display-3 text-center">STAGED LOADS</h1>
+            </div>
+            <div class="col">
+                <img src="~/img/lol_logo_transparent.png" alt="LOL LOGO" width="300px"/>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <p class="text-end">Carrier Name</p>
+            </div>
+            <div class="col">
+                <h2 class="display-5 text-center border border-2 border-dark">@Model.CarrierName</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <p class="text-end">Load Number</p>
+            </div>
+            <div class="col">
+                <h2 class="display-5 text-center border border-2 border-dark">@Model.MbolNbr</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <p class="text-end">Stage Location</p>
+            </div>
+            <div class="col">
+                <h2 class="display-5 text-center border border-2 border-dark">@Model.StageLocation</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col"></div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-end">Stagers Initials</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-center">@Model.StagerName</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark"></div>
+                        <div class="col-sm-3 border-top border-start border-end border-bottom border-2 border-dark"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 border border-2 border-dark w-100">
+                            <p>
+                                Stagers are responsible for staging correct amount of cartons and in good condition. Any errors or damaged product will result in Disciplinary Action.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mb-2">
+            <div class="col"></div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-end">Start Time</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-center">@Model.StageStartTime</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-end">Finish Time</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-end border-bottom border-2 border-dark">
+                            <p class="text-center">@Model.StageFinishTime</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 border border-2 border-dark w-100">
+                            <p>
+                                Customer: @Model.CustomerName
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-end">Total Cartons</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-center">@Model.NumberCartons</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-bottom border-2 border-dark">
+                            <p class="text-end">Total Cube</p>
+                        </div>
+                        <div class="col-sm-3 border-top border-start border-end border-bottom border-2 border-dark">
+                            <p class="text-center">@Model.LoadCube</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 border border-2 border-dark w-100">
+                            <p>
+                                Notes:  @Model.LoadComments
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+    </div>
 </body>
 </html>

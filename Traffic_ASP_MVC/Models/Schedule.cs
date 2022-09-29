@@ -46,5 +46,12 @@ namespace Traffic_ASP_MVC.Models
         public string? TrailerNbr { get; set; }
 
         public string? StageLocation { get; set; }
+
+        public DateTime? StageStartTime { get; set; }
+
+        public DateTime? StageFinishTime { get; set; }
+
+        public string? StagerName { get; set; }
+
     }
 }
