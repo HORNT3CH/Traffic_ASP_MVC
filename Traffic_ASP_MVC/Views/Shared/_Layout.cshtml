@@ -275,7 +275,6 @@
                 second: 'numeric'
             })
             $('#loadStartTime').val(output);
-            console.log(output);
         });
     });
     $(document).ready(function() {
@@ -290,7 +289,8 @@
                 second: 'numeric'
             })
             $('#loadFinishTime').val(output);
-            console.log(output);
+            var status = 'Loaded';
+            $('#loadStatus').val(status);
         });
     });
     $(document).ready(function() {
@@ -305,7 +305,8 @@
                 second: 'numeric'
             })
             $('#stageStartTime').val(output);
-            console.log(output);
+            var status = 'Staged';
+            $('#loadStatus').val(status);
         });
     });
     $(document).ready(function() {
@@ -320,7 +321,6 @@
                 second: 'numeric'
             })
             $('#stageFinishTime').val(output);
-            console.log(output);
         });
     });
     $(document).ready(function() {

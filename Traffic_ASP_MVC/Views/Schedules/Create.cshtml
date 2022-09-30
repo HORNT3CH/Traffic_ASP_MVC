@@ -10,132 +10,121 @@
 <hr />
 <div class="container">
     <form asp-action="Create">
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ScheduleDate" class="control-label">Click to Select Date</label>
-                    <input type="text" asp-for="ScheduleDate" readonly class="form-control datepicker" />
-                    <span asp-validation-for="ScheduleDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TimeSlot" class="control-label">Time Slot</label>
-                    @Html.DropDownListFor(n => n.TimeSlot, ViewBag.TimeSlot as SelectList, "Select Time Slot" , new {@class="form-control" })
-                    <span asp-validation-for="TimeSlot" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Status" class="control-label">Status</label>
-                    <select asp-for="Status" class="form-control">
-                        <option value="">Select Status</option>
-                        <option value="Created" selected>Created</option>
-                        <option value="At Dock">At Dock</option>
-                        <option value="Staged">Staged</option>
-                        <option value="Loaded">Loaded</option>
-                    </select>
-                    <span asp-validation-for="Status" class="text-danger"></span>
+        <div class="row row-cols-3">
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+
+                        <!-- LOAD INFO SECTION -->
+                                                
+                        <div class="form-group">
+                            <label asp-for="Type" class="control-label">Status</label>
+                            <select asp-for="Type" class="form-control">
+                                <option value="">Select Type</option>
+                                <option value="LIVE">LIVE</option>
+                                <option value="SPOT">SPOT</option>
+                            </select>
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>    
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="MbolNbr" class="control-label">MBOL #</label>
+                            <input asp-for="MbolNbr" class="form-control" />
+                            <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadNbr" class="control-label">Load #</label>
+                            <input asp-for="LoadNbr" class="form-control" />
+                            <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ScheduleDate" class="control-label">Click to Select Date</label>
+                            <input type="text" asp-for="ScheduleDate" readonly class="form-control datepicker" />
+                            <span asp-validation-for="ScheduleDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TimeSlot" class="control-label">Time Slot</label>
+                            @Html.DropDownListFor(n => n.TimeSlot, ViewBag.TimeSlot as SelectList, "Select Time Slot" , new {@class="form-control" })
+                            <span asp-validation-for="TimeSlot" class="text-danger"></span>
+                        </div>                        
+                        <hr />
+                    </div>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+
+                        <!-- LOAD INFO CONTINUED SECTION -->
+                                                
+                        <div class="form-group">
+                            <label asp-for="CarrierName" class="control-label">Carrier Name</label>
+                            @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
+                            <span asp-validation-for="CarrierName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerName" class="control-label">Customer Name</label>
+                            @Html.DropDownListFor(n => n.CustomerName, ViewBag.Customer as SelectList, "Select Customer" , new {@class="form-control"})
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerCity" class="control-label">City Name</label>
+                            @Html.DropDownListFor(n => n.CustomerCity, ViewBag.City as SelectList, "Select City" , new {@class="form-control"})
+                            <span asp-validation-for="CustomerCity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CustomerState" class="control-label">State Name</label>
+                            @Html.DropDownListFor(n => n.CustomerState, ViewBag.State as SelectList, "Select State" , new {@class="form-control"})
+                            <span asp-validation-for="CustomerState" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberCartons" class="control-label"># Cartons</label>
+                            <input asp-for="NumberCartons" class="form-control" />
+                            <span asp-validation-for="NumberCartons" class="text-danger"></span>
+                        </div>                  
+                        <hr />                        
+                    </div>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="row px-1">
+                    <div class="col border border-2 border-dark rounded-3">
+                        <div class="form-group">
+                            <label asp-for="LoadCube" class="control-label">Cube</label>
+                            <input asp-for="LoadCube" class="form-control" />
+                            <span asp-validation-for="LoadCube" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadComments" class="control-label">Comments</label>
+                            <input asp-for="LoadComments" class="form-control" />
+                            <span asp-validation-for="LoadComments" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoadScheduler" class="control-label">Scheduler</label>
+                            @Html.DropDownListFor(n => n.LoadScheduler, ViewBag.Coordinator as SelectList, "Select Scheduler" , new {@class="form-control"})
+                            <span asp-validation-for="LoadScheduler" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Status" class="control-label">Status</label>
+                            <select asp-for="Status" class="form-control">
+                                <option value="">Select Status</option>
+                                <option value="Created" selected>Created</option>
+                                <option value="At Dock">At Dock</option>
+                                <option value="Staged">Staged</option>
+                                <option value="Loaded">Loaded</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>                                                                
+                        <div class="form-group mt-3 d-flex flex-column justify-content-end">
+                            <input type="submit" value="Save" class="btn btn-primary"/>
+                            <br />
+                            <a class="btn btn-warning" asp-action="Index">Back to List</a>
+                        </div>
+                        <hr />
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="Type" class="control-label">Status</label>
-                    <select asp-for="Type" class="form-control">
-                        <option value="">Select Type</option>
-                        <option value="Live">Live</option>
-                        <option value="Spot">Spot</option>
-                    </select>
-                    <span asp-validation-for="Type" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NumberCartons" class="control-label"># Cartons</label>
-                    <input asp-for="NumberCartons" class="form-control" />
-                    <span asp-validation-for="NumberCartons" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadCube" class="control-label">Cube</label>
-                    <input asp-for="LoadCube" class="form-control" />
-                    <span asp-validation-for="LoadCube" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="MbolNbr" class="control-label">MBOL #</label>
-                    <input asp-for="MbolNbr" class="form-control" />
-                    <span asp-validation-for="MbolNbr" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadNbr" class="control-label">Load #</label>
-                    <input asp-for="LoadNbr" class="form-control" />
-                    <span asp-validation-for="LoadNbr" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoaderName" class="control-label">Loader Name</label>
-                    <input asp-for="LoaderName" class="form-control" disabled/>
-                    <span asp-validation-for="LoaderName" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="CarrierName" class="control-label">Carrier Name</label>
-                    @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
-                    <span asp-validation-for="CarrierName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CustomerName" class="control-label">Customer Name</label>
-                    @Html.DropDownListFor(n => n.CustomerName, ViewBag.Customer as SelectList, "Select Customer" , new {@class="form-control"})
-                    <span asp-validation-for="CustomerName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CustomerCity" class="control-label">City Name</label>
-                    @Html.DropDownListFor(n => n.CustomerCity, ViewBag.City as SelectList, "Select City" , new {@class="form-control"})
-                    <span asp-validation-for="CustomerCity" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="CustomerState" class="control-label">State Name</label>
-                    @Html.DropDownListFor(n => n.CustomerState, ViewBag.State as SelectList, "Select State" , new {@class="form-control"})
-                    <span asp-validation-for="CustomerState" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadComments" class="control-label">Comments</label>
-                    <input asp-for="LoadComments" class="form-control" />
-                    <span asp-validation-for="LoadComments" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LoadScheduler" class="control-label">Scheduler</label>
-                    @Html.DropDownListFor(n => n.LoadScheduler, ViewBag.Coordinator as SelectList, "Select Scheduler" , new {@class="form-control"})
-                    <span asp-validation-for="LoadScheduler" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label asp-for="Location" class="control-label">Location</label>
-                    <input asp-for="Location" class="form-control" disabled/>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StageLocation" class="control-label">Stage Location</label>
-                    <input asp-for="StageLocation" class="form-control" disabled/>
-                </div>
-@*                <div class="form-group">
-                    <label asp-for="FinishTime" class="control-label">Finish Time</label>
-                    <input asp-for="FinishTime" class="form-control" disabled/>
-                </div>*@
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
-                <div class="form-group mt-3 d-flex flex-column justify-content-end">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    <br />
-                    <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Home</a>
-                </div>
-            </div>            
-        </div>
+        </div>         
     </form>
 </div>
 

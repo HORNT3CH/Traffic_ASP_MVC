@@ -43,12 +43,12 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model.Data) {
+    @foreach (var item in Model.Data) {       
             <tr>
                 <td class="fit">
                     <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
                     <a class="btn btn-warning btn-sm" asp-action="Details" asp-route-id="@item.ID">Details</a>
-                        @if (item.Status != "At Dock")
+                        @if (item.Status != "At Dock" && item.StageFinishTime != null)
                         {
                             <a class="btn btn-info btn-sm" asp-action="StageSheet" asp-route-id="@item.ID" target="_blank">Stage Sheet</a>    
                         }

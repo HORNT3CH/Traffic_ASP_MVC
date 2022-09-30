@@ -4,8 +4,8 @@ namespace Traffic_ASP_MVC.ViewModels
 {
     public class DockLotList
     {
-        public IEnumerable<DockLot>? DockLots { get; set; }
+        public IEnumerable<DockLot>? DockLot { get; set; }
 
-        public DockLot? TrailerNbr { get; set; }
+        public string? TrailerNbr { get; set; } 
     }
 }
