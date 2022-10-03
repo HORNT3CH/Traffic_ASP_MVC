@@ -235,9 +235,16 @@
                             <br />
                             <a class="btn btn-warning" asp-action="Index">Back to List</a>
                         </div>
-                            @Html.LabelFor(n => n.TrailerNbr, new {@class="control-label"})
-                            @Html.DropDownListFor(n => n.TrailerNbr, ViewBag.DockLot as SelectList, "Select Trailer", new {@class="form-control"})   
                         <hr />
+                        @if (Model.Type == "SPOT")
+                        {
+                            @Html.LabelFor(n => n.TrailerNbr, "Spot Trailer Numbers", new {@class="control-label"})
+                            @Html.DropDownListFor(n => n.TrailerNbr, ViewBag.DockLot as SelectList, "Select Trailer", new {@class="form-control", @id="spotTrailer"})   
+                            <div class="form-group">
+                            <a id="setSpot" class="btn btn-success mt-1" role="button">Set Spot Trailer</a>
+                            </div>
+                            <hr />    
+                        }                        
                     </div>                    
                 </div>
             </div>

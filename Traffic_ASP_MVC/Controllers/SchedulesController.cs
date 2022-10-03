@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using cloudscribe.Pagination.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Traffic_ASP_MVC.Data;
 using Traffic_ASP_MVC.Models;
@@ -80,7 +81,7 @@ namespace Traffic_ASP_MVC.Controllers
                 await _context.SaveChangesAsync();
                 TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " Was Scheduled On " + schedule.ScheduleDate.ToShortDateString() + " At " + schedule.TimeSlot + "!";
                 return RedirectToAction(nameof(Index));
-            }
+            }                    
             return View(schedule);
         }
 
@@ -94,13 +95,14 @@ namespace Traffic_ASP_MVC.Controllers
             ViewBag.City = new SelectList(_context.Cities.ToList().OrderBy(x => x.CityName), "CityName", "CityName");
             ViewBag.State = new SelectList(_context.States.ToList().OrderBy(x => x.StateName), "StateName", "StateName");
             ViewBag.Doors = new SelectList(_context.Doors.ToList().Where(y => y.Status == "Open" && y.Type == "Door").OrderBy(x => x.Location), "Location", "Location");
-            ViewBag.DockLot = new SelectList(_context.DockLot.ToList().Where(x => x.Status == "Empty").OrderBy(x => x.TrailerNbr), "TrailerNbr", "TrailerNbr");
+            
             if (id == null || _context.Schedule == null)
             {
                 return NotFound();
             }
 
             var schedule = await _context.Schedule.FindAsync(id);
+            ViewBag.DockLot = new SelectList(_context.DockLot.ToList().Where(x => x.Status == "Empty" && x.CarrierName == schedule.CarrierName).OrderBy(x => x.TrailerNbr), "TrailerNbr", "TrailerNbr");
             if (schedule == null)
             {
                 return NotFound();

@@ -324,6 +324,12 @@
         });
     });
     $(document).ready(function() {
+        $('#setSpot').click(function() {
+            var spotTrailerNbr = $('#spotTrailer').val();
+            $('#trailerNbr').val(spotTrailerNbr);
+        });
+    });
+    $(document).ready(function() {
         $('#close').on('click', function() {
             $(this).closest('.alert').hide();
         });
