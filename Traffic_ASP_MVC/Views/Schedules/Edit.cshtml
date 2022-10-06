@@ -111,11 +111,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Type" class="control-label">Type</label>
-                            <select asp-for="Type" class="form-control">
-                                <option value="">Select Type</option>
-                                <option value="LIVE">LIVE</option>
-                                <option value="SPOT">SPOT</option>
-                            </select>
+                            <input asp-for="Type" class="form-control" readonly />
                             <span asp-validation-for="Type" class="text-danger"></span>
                         </div>                        
                         <hr />
@@ -172,8 +168,8 @@
                             }
                         </div>
                         <div class="form-group">
-                            <label asp-for="StageFinishTime" class="control-label @((Model.StageStartTime != null && Model.StagerName != null) ? "text-danger" : null)">Finish Time</label>
-                            <input id="stageFinishTime" asp-for="StageFinishTime" class="form-control @((Model.StageStartTime != null && Model.StagerName != null) ? "border-danger" : null)"/>
+                            <label asp-for="StageFinishTime" class="control-label @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "text-danger" : null)">Finish Time</label>
+                            <input id="stageFinishTime" asp-for="StageFinishTime" class="form-control @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "border-danger" : null)"/>
                             @if (Model.StageFinishTime != null)
                             {
                                 <a id="stageFinish" class="btn btn-danger mt-1 disabled" role="button" aria-disabled="true">Set Finish</a>
@@ -185,8 +181,8 @@
                         </div>
                         <hr />
                         <div class="form-group">
-                            <label asp-for="StageLocation" class="control-label @((Model.StageStartTime != null && Model.StagerName != null) ? "text-danger" : null)">@((Model.StageStartTime != null && Model.StagerName != null) ? "ENTER STAGE LOCATION" : "Stage Location")</label>
-                            <input asp-for="StageLocation" class="form-control @((Model.StageStartTime != null && Model.StagerName != null) ? "border-danger" : null)" />
+                            <label asp-for="StageLocation" class="control-label @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "text-danger" : null)">@((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "ENTER STAGE LOCATION" : "Stage Location")</label>
+                            <input asp-for="StageLocation" class="form-control @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "border-danger" : null)" />
                             <span asp-validation-for="StageLocation" class="text-danger"></span>
                         </div>
                         <hr />
@@ -202,7 +198,7 @@
                         <h4 class="text-center">LOADING</h4> 
                         <div class="form-group">                            
                             <label asp-for="LoaderName" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Loader Name</label>
-                            <input asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
+                            <input asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" /><span class="d-inline">Test</span>
                             <span asp-validation-for="LoaderName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -248,7 +244,7 @@
                         @if (Model.Status == "At Dock" && Model.StartTime != null && Model.Type == "SPOT")
                         {
                             @Html.LabelFor(n => n.Location, new {@class="control-label"})
-                            @Html.DropDownListFor(n => n.Location, ViewBag.Lot as SelectList, "Select Location", new {@class="form-control", @id="setLot"})
+                            @Html.DropDownListFor(n => n.Location, ViewBag.Lot as SelectList, "Select LOT", new {@class="form-control border-danger", @id="setLot"})
                             <div class="form-group">
                             <a id="lotBtn" class="btn btn-success mt-1" role="button">Set Spot Location</a>
                             </div>
