@@ -21,8 +21,8 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">                        
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -179,8 +179,8 @@
             buttons: [
                 'pageLength'
             ]
-        } );
-    } );
+        });
+    });
     // Datatable setup for Customer page to show filter, export, print, line amount
     $(document).ready(function() {
         $('#customer').DataTable( {
@@ -265,16 +265,20 @@
     });
     $(document).ready(function() {
         $('#loadStart').click(function() {
-            var d = new Date();
-            var output = d.toLocaleDateString('sv', {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric'
-            })
-            $('#loadStartTime').val(output);
+            if ($('#loader').val() == "") {
+                $('#loaderWarning').text("Enter Loader Initials");
+            } else {
+                var d = new Date();
+                var output = d.toLocaleDateString('sv', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                })
+                $('#loadStartTime').val(output);
+            }
         });
     });
     $(document).ready(function() {
@@ -295,18 +299,22 @@
     });
     $(document).ready(function() {
         $('#stageStart').click(function() {
-            var d = new Date();
-            var output = d.toLocaleDateString('sv', {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric'
-            })
-            $('#stageStartTime').val(output);
-            var status = 'Staged';
-            $('#loadStatus').val(status);
+            if ($('#stager').val() == "") {
+                $('#stagerWarning').text("Enter Stager Initials");
+            } else {
+                var d = new Date();
+                var output = d.toLocaleDateString('sv', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                })
+                $('#stageStartTime').val(output);
+                var status = 'Staged';
+                $('#loadStatus').val(status);
+            }            
         });
     });
     $(document).ready(function() {

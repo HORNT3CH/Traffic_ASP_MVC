@@ -10,10 +10,27 @@
     <label>Please wait while Saving Data...</label>
 </div>
 
+<div class="row">
+    <div class="col-md-2">
+        <h1>Edit</h1>
+        <h4>Schedule</h4>
+    </div>
+    <div class="col-md-8">
+        @if(Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock")
+        {
+            <h4>Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.</h4>
+        }
+        else if (Model.StartTime != null && Model.LoaderName != null && Model.Status == "At Dock" && Model.Type == "LIVE")
+        {
+            <h4>Is this Live Load done?  If so, Click on Finish, make sure status is Loaded, and Click on Save.</h4>
+        }
+        else if (Model.Status == "Created")
+        {
+            <h4>Are we staging this?</h4>
+        }
+    </div>
+</div>
 
-<h1>Edit</h1>
-
-<h4>Schedule</h4>
 <hr />
 <div class="container">
     <form asp-action="Edit">
@@ -116,10 +133,10 @@
                         </div>                        
                         <hr />
                         <div class="form-group">
-                            @if (Model.Type == "Spot")
+                            @if (Model.Type == "Spot" || Model.Status == "At Dock")
                             {
                                 <label asp-for="TrailerNbr" class="control-label">Select Spot Trailer</label>
-                                <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" disabled />
+                                <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" readonly />
                             }
                             else
                             {
@@ -131,7 +148,7 @@
                             @if (Model.Status == "At Dock")
                             {
                                 <label asp-for="Location" class="control-label">Location</label>
-                                <input id="setLocation" asp-for="Location" class="form-control" value=@Model.Location />
+                                <input id="setLocation" asp-for="Location" class="form-control" value=@Model.Location readonly />
                             }
                             else
                             {
@@ -152,8 +169,8 @@
                         <h4 class="text-center">STAGING</h4>
                         <div class="form-group">                            
                             <label asp-for="StagerName" class="control-label">Stager Name</label>
-                            <input asp-for="StagerName" class="form-control" />
-                            <span asp-validation-for="StagerName" class="text-danger"></span>
+                            <input id="stager" asp-for="StagerName" class="form-control" />
+                            <span id="stagerWarning" asp-validation-for="StagerName" class="text-danger"></span>
                         </div>
                         <div class="form-group">                            
                             <label asp-for="StageStartTime" class="control-label">Start Time</label>
@@ -198,8 +215,8 @@
                         <h4 class="text-center">LOADING</h4> 
                         <div class="form-group">                            
                             <label asp-for="LoaderName" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Loader Name</label>
-                            <input asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" /><span class="d-inline">Test</span>
-                            <span asp-validation-for="LoaderName" class="text-danger"></span>
+                            <input id="loader" asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
+                            <span id="loaderWarning" asp-validation-for="LoaderName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="StartTime" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Start Time</label>
@@ -312,7 +329,7 @@
             $("form").submit();
         }, 1);
         return true;
-    }    
+    }
 </script>
 
 }

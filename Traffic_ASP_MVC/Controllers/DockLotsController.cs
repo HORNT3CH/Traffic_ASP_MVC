@@ -23,7 +23,7 @@ namespace Traffic_ASP_MVC.Controllers
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
             
-            var theDockLot = _context.DockLot.Skip(ExcludeRecords).Take(pageSize).OrderBy(x => x.CarrierName);
+            var theDockLot = _context.DockLot.Skip(ExcludeRecords).Take(pageSize).Where(x => x.Location != "Exit").OrderBy(x => x.CarrierName);
             
             var result = new PagedResult<DockLot>
             {
