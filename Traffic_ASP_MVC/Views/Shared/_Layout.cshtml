@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/fc-4.1.0/fh-3.2.4/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/datatables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Traffic_ASP_MVC.styles.css" asp-append-version="true" />
@@ -346,6 +347,144 @@
     $(document).ready(function() {
         $('#close').on('click', function() {
             $(this).closest('.alert').hide();
+        });
+    });
+
+    // Help hints for Staging Start
+    $(document).ready(function() {
+        $('#btnStageStartHint').on('click', function() {
+            $('#stageStart').addClass('border-3 border-danger');
+            $('#stageStartTime').addClass('border-3 border-danger');
+            $('#stager').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Staging Stop
+    $(document).ready(function () {
+        $('#btnStageStopHint').on('click', function () {            
+            $('#stageStart').removeClass('border-3 border-danger');
+            $('#stageStartTime').removeClass('border-3 border-danger');
+            $('#stager').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Starting Live Start Hint
+    $(document).ready(function () {
+        $('#btnStartLiveStartHint').on('click', function () {
+            $('#loadStart').addClass('border-3 border-danger');
+            $('#loadStartTime').addClass('border-3 border-danger');
+            $('#loader').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Starting Live Stop Hint
+    $(document).ready(function () {
+        $('#btnStartLiveStopHint').on('click', function () {
+            $('#loadStart').removeClass('border-3 border-danger');
+            $('#loadStartTime').removeClass('border-3 border-danger');
+            $('#loader').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Finishing Live Start Hint
+    $(document).ready(function () {
+        $('#btnFinishLiveStartHint').on('click', function () {
+            $('#loadStatus').addClass('border-3 border-danger');
+            $('#loadFinishTime').addClass('border-3 border-danger');
+            $('#loadFinish').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Finishing Live Stop Hint
+    $(document).ready(function () {
+        $('#btnFinishLiveStopHint').on('click', function () {
+            $('#loadStatus').removeClass('border-3 border-danger');
+            $('#loadFinishTime').removeClass('border-3 border-danger');
+            $('#loadFinish').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Finishing Spot Start Hint
+    $(document).ready(function () {
+        $('#btnFinishSpotStartHint').on('click', function () {
+            $('#loadStatus').addClass('border-3 border-danger');
+            $('#loadFinishTime').addClass('border-3 border-danger');
+            $('#loadFinish').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+            $('#setLot').addClass('border-3 border-danger');
+            $('#lotBtn').addClass('border-3 border-danger');
+        });
+    });
+    // Help hints for Finishing Spot Stop Hint
+    $(document).ready(function () {
+        $('#btnFinishSpotStopHint').on('click', function () {
+            $('#loadStatus').removeClass('border-3 border-danger');
+            $('#loadFinishTime').removeClass('border-3 border-danger');
+            $('#loadFinish').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+            $('#setLot').removeClass('border-3 border-danger');
+            $('#lotBtn').removeClass('border-3 border-danger');
+        });
+    });
+    // Stage a order in Created Status
+    $(document).ready(function () {
+        $('#btnSetupToStageLive').on('click', function () {
+            $('#stageSection').removeClass('hidden');
+            $('#stageOnly').removeClass('hidden');
+            $('#putInDoor').addClass('hidden');
+            $('#trailerNbr').removeClass('border-3 border-danger');
+            $('#Location').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+            $('#stageStart').removeClass('border-3 border-danger');
+            $('#spotTrailer').removeClass('border-3 border-danger');
+            $('#setSpot').removeClass('border-3 border-danger');
+        });
+    });
+    // Put a Trailer in door for Created Status
+    $(document).ready(function () {
+        $('#btnPutInDoorLive').on('click', function () {
+            $('#stageSection').addClass('hidden');
+            $('#putInDoor').removeClass('hidden');
+            $('#stageOnly').addClass('hidden');
+            $('#stager').removeClass('border-3 border-danger');
+            $('#stageStartTime').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Put a Trailer in door hint start
+    $(document).ready(function () {
+            $('#btnInDoorStartHint').on('click', function () {
+            $('#trailerNbr').addClass('border-3 border-danger');
+            $('#Location').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Put a Trailer in door hint start spot
+    $(document).ready(function () {
+        $('#btnInDoorStartHintSpot').on('click', function () {
+            $('#trailerNbr').addClass('border-3 border-danger');
+            $('#Location').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+            $('#spotTrailer').addClass('border-3 border-danger');
+            $('#setSpot').addClass('border-3 border-danger');
+        });
+    });
+    // Put a Trailer in door hint stop
+    $(document).ready(function () {
+            $('#btnInDoorStopHint').on('click', function () {
+            $('#trailerNbr').removeClass('border-3 border-danger');
+            $('#Location').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Put a Trailer in door hint stop spot
+    $(document).ready(function () {
+        $('#btnInDoorStopHintSpot').on('click', function () {
+            $('#trailerNbr').removeClass('border-3 border-danger');
+            $('#Location').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+            $('#spotTrailer').removeClass('border-3 border-danger');
+            $('#setSpot').removeClass('border-3 border-danger');
         });
     });
     </script>

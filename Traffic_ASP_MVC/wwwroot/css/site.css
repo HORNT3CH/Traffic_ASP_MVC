@@ -61,3 +61,15 @@ body {
 #close:hover {
     cursor: pointer;
 }
+
+.liveSquare {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.spotSquare {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}

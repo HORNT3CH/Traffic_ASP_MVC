@@ -13,6 +13,14 @@
 
 <h1>Schedule</h1>
 
+<div class="d-flex justify-content-end">
+    <p class="me-2">At Dock Legend: </p>
+    <div class="liveSquare bg-info"></div>
+    <p class="me-1"> Live in Process</p>
+    <div class="spotSquare bg-warning"></div>
+    <p class="me-3"> Spot in Process</p>
+</div>
+
 <div class="container-fluid table-responsive">
     <table id="schedule" class="display table table-bordered table-striped w-auto">
         <thead>
@@ -44,7 +52,7 @@
         </thead>
         <tbody>
     @foreach (var item in Model.Data) {       
-            <tr class="@((item.Status == "At Dock" && item.StartTime != null) ? "bg-info" : null)">
+            <tr class="@((item.Status == "At Dock" && item.StartTime != null && item.Type == "LIVE") ? "bg-info" : null) @((item.Status == "At Dock" && item.StartTime != null && item.Type == "SPOT") ? "bg-warning" : null)">
                 <td class="fit">
                         @if (item.Status != "Loaded")
                         {

@@ -12,21 +12,58 @@
 
 <div class="row">
     <div class="col-md-2">
-        <h1>Edit</h1>
-        <h4>Schedule</h4>
+        <h1>Load # @Model.MbolNbr</h1>
+        <h3>Load Type: @Model.Type</h3>
     </div>
-    <div class="col-md-8">
-        @if(Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock")
+    <div class="col-md-8 mt-1">
+        @if(Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
         {
-            <h4>Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.</h4>
+            <h5>
+                Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.<br /> Show Hint? <span><button id="btnStartLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnStartLiveStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
         }
         else if (Model.StartTime != null && Model.LoaderName != null && Model.Status == "At Dock" && Model.Type == "LIVE")
         {
-            <h4>Is this Live Load done?  If so, Click on Finish, make sure status is Loaded, and Click on Save.</h4>
+            <h5>
+                Is this Live Load done?  If so, Click on Set Finish, make sure status is Loaded, and Click on Save.<br /> Show Hint? <span><button id="btnFinishLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnFinishLiveStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
         }
-        else if (Model.Status == "Created")
+        else if (Model.Status == "Created" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
         {
-            <h4>Are we staging this?</h4>
+            <h5>
+                What are we doing with this Live Load? <span><button id="btnSetupToStageLive" class="btn btn-group-sm btn-primary">Staging Only</button></span>
+                <span><button id="btnPutInDoorLive" class="btn btn-group-sm btn-primary">Putting Trailer in Door</button></span>
+            </h5>
+            <div id="stageOnly" class="hidden">
+                <h5>Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
+                <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                    Hide Hint. <span><button id="btnStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                </h5>
+            </div>
+            <div id="putInDoor" class="hidden">
+                <h5>
+                    @(Model.Type == "LIVE" ? "Type in Trailer Number, select door from Location, and click on Save." : "Select Trailer Number from Spot Trailer Numbers Dropdown, CLICK ON Set Spot Trailer Button, select door from Location, and click on Save.")<br /> Show Hint?
+                    <span><button id="@(Model.Type == "LIVE" ? "btnInDoorStartHint" : "btnInDoorStartHintSpot")" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                    Hide Hint. <span><button id="@(Model.Type == "LIVE" ? "btnInDoorStopHint" : "btnInDoorStopHintSpot")" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                </h5>
+            </div>
+            
+        }        
+        else if (Model.Status == "Staged" && Model.Type == "LIVE")
+        {
+            <h5>
+                Are we Loading this Staged Live Load? Enter the Trailer Number and Select Door Location. Click on Save. Show Hint? <span><button id="btnLoadingStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnLoadingStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
+        }
+        else if (Model.Status == "At Dock" && Model.Type == "SPOT" && Model.StartTime != null)
+        {
+            <h5>
+                Is this Spot Load done?  If so, Click on Set Finish, make sure status is Loaded. Select Exit or a location in the yard from Location. Now, click on Set Spot Location. Now, Click on Save.<br /> Show Hint? <span><button id="btnFinishSpotStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnFinishSpotStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
         }
     </div>
 </div>
@@ -162,7 +199,7 @@
             </div>
             <div class="col @(Model.Status == "At Dock" ? "hidden" : null)">
                 <div class="row px-1">
-                    <div class="col border border-2 border-dark rounded-3">
+                    <div id="stageSection" class="col border border-2 border-dark rounded-3 @(Model.Status == "Created" || Model.Status == "Staged" ? "hidden" : null)">
 
                         <!-- STAGING SECTION -->
 
@@ -208,17 +245,17 @@
             </div>
             <div class="col">
                 <div class="row px-1">
-                    <div class="col border border-2 border-dark rounded-3">   
+                    <div class="col border border-2 border-dark rounded-3">
 
                         <!-- LOADING SECTION -->
 
-                        <h4 class="text-center">LOADING</h4> 
-                        <div class="form-group">                            
+                        <h4 class="text-center @(Model.TrailerNbr == null ? "hidden" : null)">LOADING</h4>
+                        <div class="form-group @(Model.TrailerNbr == null ? "hidden" : null)">
                             <label asp-for="LoaderName" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Loader Name</label>
                             <input id="loader" asp-for="LoaderName" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
                             <span id="loaderWarning" asp-validation-for="LoaderName" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @(Model.TrailerNbr == null ? "hidden" : null)">
                             <label asp-for="StartTime" class="control-label @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "text-danger" : null)">Start Time</label>
                             <input id="loadStartTime" asp-for="StartTime" class="form-control @((Model.Status == "At Dock" && Model.LoaderName == null && Model.StartTime == null) ? "border-danger" : null)" />
                             @if (Model.StartTime != null)
@@ -230,7 +267,7 @@
                                 <a id="loadStart" class="btn btn-success mt-1" role="button" aria-disabled="false">Set Start</a>    
                             }
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @(Model.TrailerNbr == null ? "hidden" : null)">
                             <label asp-for="FinishTime" class="control-label @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "text-danger" : null)">Finish Time</label>
                             <input id="loadFinishTime" asp-for="FinishTime" class="form-control @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "border-danger" : null)"/>
                             @if (Model.FinishTime != null)
@@ -244,7 +281,7 @@
                         </div>
                         <hr />
                         <div class="form-group mt-3 d-flex flex-column justify-content-end">
-                            <input type="submit" onclick="return DisplayProgressMessage(this, 'Saving...')" value="Save" class="btn btn-primary"/>
+                            <input id="save" type="submit" onclick="return DisplayProgressMessage(this, 'Saving...')" value="Save" class="btn btn-primary"/>
                             <br />
                             <a class="btn btn-warning" asp-action="Index">Back to List</a>
                         </div>
