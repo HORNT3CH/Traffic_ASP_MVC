@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using cloudscribe.Pagination.Models;
@@ -15,7 +16,7 @@ namespace Traffic_ASP_MVC.Controllers
     public class SchedulesController : Controller
     {
         private readonly Traffic_Schedule_Context _context;
-
+        
         public SchedulesController(Traffic_Schedule_Context context)
         {
             _context = context;
@@ -153,6 +154,7 @@ namespace Traffic_ASP_MVC.Controllers
             return View(schedule);
         }
 
+        
         // GET: Schedules/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

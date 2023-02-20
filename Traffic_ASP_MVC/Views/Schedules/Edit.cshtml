@@ -15,8 +15,8 @@
         <h1>Load # @Model.MbolNbr</h1>
         <h3>Load Type: @Model.Type</h3>
     </div>
-    <div class="col-md-8 mt-1">
-        @if(Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
+    <div class="col-md-8 mt-1">          
+        @if (Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
         {
             <h5>
                 Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.<br /> Show Hint? <span><button id="btnStartLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
@@ -37,8 +37,9 @@
                 <span><button id="btnPutInDoorLive" class="btn btn-group-sm btn-primary">Putting Trailer in Door</button></span>
             </h5>
             <div id="stageOnly" class="hidden">
-                <h5>Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
-                <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                <h5>
+                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
+                    <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
                     Hide Hint. <span><button id="btnStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
@@ -49,20 +50,37 @@
                     Hide Hint. <span><button id="@(Model.Type == "LIVE" ? "btnInDoorStopHint" : "btnInDoorStopHintSpot")" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
-            
-        }        
-        else if (Model.Status == "Staged" && Model.Type == "LIVE")
+
+        }
+        else if (Model.Type == "SPOT" && Model.Status == "Staged" && Model.StageFinishTime != null)
         {
             <h5>
-                Are we Loading this Staged Live Load? Enter the Trailer Number and Select Door Location. Click on Save. Show Hint? <span><button id="btnLoadingStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnLoadingStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Are we Loading this Staged Spot Load? Enter the Trailer Number and Select Door Location. Click on Save.<br>
+                Show Hint? <span><button id="btnPutSpotInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnPutSpotInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
         }
-        else if (Model.Status == "At Dock" && Model.Type == "SPOT" && Model.StartTime != null)
+        else if (Model.StartTime != null && Model.LoaderName != null && Model.Status == "At Dock" && Model.Type == "SPOT" && Model.FinishTime == null)
         {
             <h5>
                 Is this Spot Load done?  If so, Click on Set Finish, make sure status is Loaded. Select Exit or a location in the yard from Location. Now, click on Set Spot Location. Now, Click on Save.<br /> Show Hint? <span><button id="btnFinishSpotStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
                 Hide Hint. <span><button id="btnFinishSpotStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
+        }
+        else if (Model.Status == "Staged" && Model.StageFinishTime == null && Model.Type == "LIVE" || Model.Type == "SPOT")
+        {
+            <h5>
+                Is this Stage Load Finished? Click on the Set Finish button to set the finish time.  Next, Enter the Stage Location.  Now, Click on Save.<br>
+                Show Hint? <span><button id="btnStageFinishLiveShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnStageFinishLiveHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
+        }
+        else if (Model.Status == "Staged" && Model.StageFinishTime != null && Model.Type == "LIVE")
+        {
+            <h5>
+                Are we Loading this Staged Live Load? Enter the Trailer Number and Select Door Location. Click on Save.<br>
+                Show Hint? <span><button id="btnPutLiveInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnPutLiveInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
         }
     </div>
@@ -167,8 +185,11 @@
                             <label asp-for="Type" class="control-label">Type</label>
                             <input asp-for="Type" class="form-control" readonly />
                             <span asp-validation-for="Type" class="text-danger"></span>
-                        </div>                        
-                        <hr />
+                        </div>
+                        @if (Model.StageStartTime == null)
+                        {
+                            <hr />
+                        }                        
                         <div class="form-group">
                             @if (Model.Type == "Spot" || Model.Status == "At Dock")
                             {
@@ -177,8 +198,11 @@
                             }
                             else
                             {
-                                <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
-                                <input id="trailerNbr" asp-for="TrailerNbr" class="form-control"/>   
+                                @if (Model.StageStartTime == null || Model.StageFinishTime != null)
+                                {
+                                    <label asp-for="TrailerNbr" class="control-label">Enter Trailer #</label>
+                                    <input id="trailerNbr" asp-for="TrailerNbr" class="form-control" />
+                                }                                
                             }
                         </div>
                         <div class="form-group">
@@ -189,17 +213,24 @@
                             }
                             else
                             {
-                                @Html.LabelFor(n => n.Location, new {@class="control-label"})
-                                @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})                                         <span asp-validation-for="Location" class="text-danger"></span>
+                                @if (Model.StageStartTime == null || Model.StageFinishTime != null)
+                                {
+                                    @Html.LabelFor(n => n.Location, new {@class="control-label"})
+                                    @Html.DropDownListFor(n => n.Location, ViewBag.Doors as SelectList, "Select Location", new {@class="form-control"})                                         <span asp-validation-for="Location" class="text-danger"></span>
+                                }
+                                
                             }
                         </div>
-                        <hr />
+                        @if (Model.StageStartTime == null || Model.StageFinishTime != null)
+                        {
+                            <hr />
+                        }                        
                     </div>
                 </div>                
             </div>
-            <div class="col @(Model.Status == "At Dock" ? "hidden" : null)">
+            <div class="col @(Model.Status == "At Dock" || Model.StageFinishTime != null ? "hidden" : null)">
                 <div class="row px-1">
-                    <div id="stageSection" class="col border border-2 border-dark rounded-3 @(Model.Status == "Created" || Model.Status == "Staged" ? "hidden" : null)">
+                    <div id="stageSection" class="col border border-2 border-dark rounded-3 @(Model.Status == "Created" || Model.Status == "Staged" && Model.StageStartTime == null ? "hidden" : null)">
 
                         <!-- STAGING SECTION -->
 
@@ -237,7 +268,7 @@
                         <div class="form-group">
                             <label asp-for="StageLocation" class="control-label @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "text-danger" : null)">@((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "ENTER STAGE LOCATION" : "Stage Location")</label>
                             <input asp-for="StageLocation" class="form-control @((Model.StageStartTime != null && Model.StagerName != null && Model.FinishTime != null) ? "border-danger" : null)" />
-                            <span asp-validation-for="StageLocation" class="text-danger"></span>
+                            <span id="stageLocationWarning" asp-validation-for="StageLocation" class="text-danger"></span>
                         </div>
                         <hr />
                     </div>
@@ -286,7 +317,7 @@
                             <a class="btn btn-warning" asp-action="Index">Back to List</a>
                         </div>
                         <hr />
-                        @if (Model.Type == "SPOT" && Model.Status != "At Dock")
+                        @if (Model.Type == "SPOT" && (Model.Status != "At Dock" && Model.StageFinishTime != null) || (Model.Status == "Created" && Model.StageFinishTime == null))
                         {
                             @Html.LabelFor(n => n.TrailerNbr, "Spot Trailer Numbers", new {@class="control-label"})
                             @Html.DropDownListFor(n => n.TrailerNbr, ViewBag.DockLot as SelectList, "Select Trailer", new {@class="form-control", @id="spotTrailer"})                              

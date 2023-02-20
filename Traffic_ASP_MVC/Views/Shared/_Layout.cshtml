@@ -320,16 +320,20 @@
     });
     $(document).ready(function() {
         $('#stageFinish').click(function() {
-            var d = new Date();
-            var output = d.toLocaleDateString('sv', {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric'
-            })
-            $('#stageFinishTime').val(output);
+            if ($('#StageLocation').val() == "") {
+                $('#stageLocationWarning').text("Enter Stage Location");
+            } else {
+                var d = new Date();
+                var output = d.toLocaleDateString('sv', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                })
+                $('#stageFinishTime').val(output);
+            }
         });
     });
     $(document).ready(function() {
@@ -485,6 +489,60 @@
             $('#save').removeClass('border-3 border-danger');
             $('#spotTrailer').removeClass('border-3 border-danger');
             $('#setSpot').removeClass('border-3 border-danger');
+        });
+    });
+    // Helps hints for finishing a staged live load
+    $(document).ready(function () {
+        $('#btnStageFinishLiveShowHint').on('click', function () {
+            $('#stageFinishTime').addClass('border-3 border-danger');
+            $('#stageFinish').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+            $('#StageLocation').addClass('border-3 border-danger');            
+        });
+    });
+    // Hide hints for finishing a staged live load
+    $(document).ready(function () {
+        $('#btnStageFinishLiveHideHint').on('click', function () {
+            $('#stageFinishTime').removeClass('border-3 border-danger');
+            $('#stageFinish').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+            $('#StageLocation').removeClass('border-3 border-danger');
+        });
+    });
+    // Show hints for putting a spot trailer in for a staged load
+    $(document).ready(function () {
+        $('#btnPutSpotInDoorShowHint').on('click', function () {
+            $('#spotTrailer').addClass('border-3 border-danger');
+            $('#setSpot').addClass('border-3 border-danger');
+            $('#Location').addClass('border-3 border-danger');
+            $('#trailerNbr').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Hide hints for putting a spot trailer in for a staged load
+    $(document).ready(function () {
+        $('#btnPutSpotInDoorHideHint').on('click', function () {
+            $('#spotTrailer').removeClass('border-3 border-danger');
+            $('#setSpot').removeClass('border-3 border-danger');
+            $('#Location').removeClass('border-3 border-danger');
+            $('#trailerNbr').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    // Show hints for putting a live trailer in for staged live
+    $(document).ready(function () {
+        $('#btnPutLiveInDoorShowHint').on('click', function () {
+            $('#trailerNbr').addClass('border-3 border-danger');
+            $('#Location').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+        });
+    });
+    // Hide hints for putting a live trailer in for staged live
+    $(document).ready(function () {
+        $('#btnPutLiveInDoorHideHint').on('click', function () {
+            $('#trailerNbr').removeClass('border-3 border-danger');
+            $('#Location').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
         });
     });
     </script>
