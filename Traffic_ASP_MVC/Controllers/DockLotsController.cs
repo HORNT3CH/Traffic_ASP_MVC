@@ -73,7 +73,7 @@ namespace Traffic_ASP_MVC.Controllers
             {
                 _context.Add(dockLot);
                 await _context.SaveChangesAsync();
-                TempData["AlertMessage"] = "Trailer " + dockLot.TrailerNbr + " Was Added To " + dockLot.Location + "!";
+                TempData["AlertMessage"] = dockLot.CarrierName + " trailer " + dockLot.TrailerNbr + " was Added To " + dockLot.Location + "...!";
                 return RedirectToAction(nameof(Index));
             }
             return View(dockLot);

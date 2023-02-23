@@ -284,18 +284,20 @@
     });
     $(document).ready(function() {
         $('#loadFinish').click(function() {
-            var d = new Date();
-            var output = d.toLocaleDateString('sv', {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric'
-            })
-            $('#loadFinishTime').val(output);
-            var status = 'Loaded';
-            $('#loadStatus').val(status);
+            if ($('#loadStartTime').val() != "") {
+                var d = new Date();
+                var output = d.toLocaleDateString('sv', {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                })
+                $('#loadFinishTime').val(output);
+                var status = 'Loaded';
+                $('#loadStatus').val(status);
+            }
         });
     });
     $(document).ready(function() {
@@ -320,26 +322,30 @@
     });
     $(document).ready(function() {
         $('#stageFinish').click(function() {
-            if ($('#StageLocation').val() == "") {
-                $('#stageLocationWarning').text("Enter Stage Location");
-            } else {
-                var d = new Date();
-                var output = d.toLocaleDateString('sv', {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                })
-                $('#stageFinishTime').val(output);
+            if ($('#stageStartTime').val() != "") {
+                if ($('#StageLocation').val() == "") {
+                        $('#stageLocationWarning').text("Enter Stage Location");
+                    } else {
+                        var d = new Date();
+                        var output = d.toLocaleDateString('sv', {
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            second: 'numeric'
+                        })
+                        $('#stageFinishTime').val(output);
+                }
             }
+            
         });
     });
     $(document).ready(function() {
         $('#setSpot').click(function() {
             var spotTrailerNbr = $('#spotTrailer').val();
             $('#trailerNbr').val(spotTrailerNbr);
+            $('#loadStatus').val('At Dock');
         });
     });
     $(document).ready(function() {
@@ -461,6 +467,7 @@
             $('#trailerNbr').addClass('border-3 border-danger');
             $('#Location').addClass('border-3 border-danger');
             $('#save').addClass('border-3 border-danger');
+            $('#loadStatus').addClass('border-3 border-danger');
         });
     });
     // Put a Trailer in door hint start spot
@@ -471,6 +478,7 @@
             $('#save').addClass('border-3 border-danger');
             $('#spotTrailer').addClass('border-3 border-danger');
             $('#setSpot').addClass('border-3 border-danger');
+            $('#loadStatus').addClass('border-3 border-danger');
         });
     });
     // Put a Trailer in door hint stop
@@ -479,6 +487,7 @@
             $('#trailerNbr').removeClass('border-3 border-danger');
             $('#Location').removeClass('border-3 border-danger');
             $('#save').removeClass('border-3 border-danger');
+            $('#loadStatus').removeClass('border-3 border-danger');
         });
     });
     // Put a Trailer in door hint stop spot
@@ -489,6 +498,7 @@
             $('#save').removeClass('border-3 border-danger');
             $('#spotTrailer').removeClass('border-3 border-danger');
             $('#setSpot').removeClass('border-3 border-danger');
+            $('#loadStatus').removeClass('border-3 border-danger');
         });
     });
     // Helps hints for finishing a staged live load
@@ -543,6 +553,22 @@
             $('#trailerNbr').removeClass('border-3 border-danger');
             $('#Location').removeClass('border-3 border-danger');
             $('#save').removeClass('border-3 border-danger');
+        });
+    });
+    $(document).ready(function () {
+        $('#btnStageFinishShowHint').on('click', function () {
+            $('#stageFinishTime').addClass('border-3 border-danger');
+            $('#stageFinish').addClass('border-3 border-danger');
+            $('#save').addClass('border-3 border-danger');
+            $('#StageLocation').addClass('border-3 border-danger');
+        });
+    });
+    $(document).ready(function () {
+        $('#btnStageFinishHideHint').on('click', function () {
+            $('#stageFinishTime').removeClass('border-3 border-danger');
+            $('#stageFinish').removeClass('border-3 border-danger');
+            $('#save').removeClass('border-3 border-danger');
+            $('#StageLocation').removeClass('border-3 border-danger');
         });
     });
     </script>

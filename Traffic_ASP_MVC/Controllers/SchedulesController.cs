@@ -141,7 +141,43 @@ namespace Traffic_ASP_MVC.Controllers
                         throw;
                     }
                 }
-                TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " Was Updated Successfully...!";
+                if (schedule.TrailerNbr != null && schedule.Status == "Created")
+                {
+                    TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " has been moved to the dock " + schedule.Location + "...!";
+                }
+                else if (schedule.Status == "Loaded" && schedule.FinishTime != null && schedule.Type == "LIVE")
+                {
+                    TempData["AlertMessage"] = schedule.LoaderName + " is finished loading and Live Load " + schedule.MbolNbr + " has been exited from the schedule...!";
+                }
+                else if (schedule.Status == "Loaded" && schedule.FinishTime != null && schedule.Type == "SPOT")
+                {
+                    TempData["AlertMessage"] = schedule.LoaderName + " is finished loading and Spot Load " + schedule.MbolNbr + " has been exited from the schedule and put in Lot " + schedule.Location + "...!";
+                }
+                else if (schedule.Status == "At Dock" && schedule.FinishTime == null && schedule.StartTime != null)
+                {
+                    TempData["AlertMessage"] = schedule.LoaderName + " has started loading " + schedule.MbolNbr + " in dock " + schedule.Location + "...!";
+                }
+                else if (schedule.Status == "Staged" && schedule.StageFinishTime == null && schedule.StageStartTime != null)
+                {
+                    TempData["AlertMessage"] = schedule.StagerName + " has started staging " + schedule.MbolNbr + "...!";
+                }
+                else if (schedule.Status == "Staged" && schedule.StageFinishTime != null && schedule.StageStartTime != null)
+                {
+                    TempData["AlertMessage"] = schedule.StagerName + " has finished staging " + schedule.MbolNbr + "...!";
+                }
+                else if (schedule.Type == "SPOT" && schedule.Status == "Staged" && schedule.StageFinishTime != null)
+                {
+                    TempData["AlertMessage"] = schedule.StagerName + " is finished staging and Spot Load " + schedule.MbolNbr + " has been updated...!";
+                }
+                else if (schedule.Type == "SPOT" && schedule.Status == "At Dock" && schedule.Location != null)
+                {
+                    TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " has been moved to the dock " + schedule.Location + "...!";
+                }
+                else if (schedule.Type == "LIVE" && schedule.Status == "At Dock" && schedule.Location != null)
+                {
+                    TempData["AlertMessage"] = "Load " + schedule.MbolNbr + " has been moved to the dock " + schedule.Location + "...!";
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(schedule);

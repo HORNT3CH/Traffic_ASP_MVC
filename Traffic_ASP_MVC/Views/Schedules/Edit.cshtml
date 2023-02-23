@@ -30,7 +30,7 @@
                 Hide Hint. <span><button id="btnFinishLiveStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
         }
-        else if (Model.Status == "Created" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
+        else if (Model.Status == "Created" && Model.Type == "SPOT")
         {
             <h5>
                 What are we doing with this Live Load? <span><button id="btnSetupToStageLive" class="btn btn-group-sm btn-primary">Staging Only</button></span>
@@ -45,9 +45,30 @@
             </div>
             <div id="putInDoor" class="hidden">
                 <h5>
-                    @(Model.Type == "LIVE" ? "Type in Trailer Number, select door from Location, and click on Save." : "Select Trailer Number from Spot Trailer Numbers Dropdown, CLICK ON Set Spot Trailer Button, select door from Location, and click on Save.")<br /> Show Hint?
-                    <span><button id="@(Model.Type == "LIVE" ? "btnInDoorStartHint" : "btnInDoorStartHintSpot")" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                    Hide Hint. <span><button id="@(Model.Type == "LIVE" ? "btnInDoorStopHint" : "btnInDoorStopHintSpot")" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                    Change Status to At Dock. Select Trailer Number from Spot Trailer Numbers Dropdown, CLICK ON Set Spot Trailer Button, select door from Location, and click on Save.")<br /> Show Hint?
+                    <span><button id="btnInDoorStartHintSpot" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                    Hide Hint. <span><button id="btnInDoorStopHintSpot" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                </h5>
+            </div>
+        }
+        else if (Model.Status == "Created" && Model.Type == "LIVE")
+        {
+            <h5>
+                What are we doing with this Live Load? <span><button id="btnSetupToStageLive" class="btn btn-group-sm btn-primary">Staging Only</button></span>
+                <span><button id="btnPutInDoorLive" class="btn btn-group-sm btn-primary">Putting Trailer in Door</button></span>
+            </h5>
+            <div id="stageOnly" class="hidden">
+                <h5>
+                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
+                    <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                    Hide Hint. <span><button id="btnStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                </h5>
+            </div>
+            <div id="putInDoor" class="hidden">
+                <h5>
+                    Change Status to At Dock. Type in Trailer Number, select door from Location, and click on Save.<br /> Show Hint?
+                    <span><button id="btnInDoorStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                    Hide Hint. <span><button id="btnInDoorStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
 
@@ -55,7 +76,8 @@
         else if (Model.Type == "SPOT" && Model.Status == "Staged" && Model.StageFinishTime != null)
         {
             <h5>
-                Are we Loading this Staged Spot Load? Enter the Trailer Number and Select Door Location. Click on Save.<br>
+                Are we Loading this Staged Spot Load? Select a trailer from Spot Trailer Numbers dropdown. Click on Set Spot Trailer.<br> 
+                Now Select a Door from the Location dropdown. Click on Save.<br>
                 Show Hint? <span><button id="btnPutSpotInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
                 Hide Hint. <span><button id="btnPutSpotInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
@@ -67,7 +89,7 @@
                 Hide Hint. <span><button id="btnFinishSpotStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
         }
-        else if (Model.Status == "Staged" && Model.StageFinishTime == null && Model.Type == "LIVE" || Model.Type == "SPOT")
+        else if (Model.Status == "Staged" && Model.StageFinishTime == null && Model.Type == "LIVE")
         {
             <h5>
                 Is this Stage Load Finished? Click on the Set Finish button to set the finish time.  Next, Enter the Stage Location.  Now, Click on Save.<br>
@@ -81,6 +103,14 @@
                 Are we Loading this Staged Live Load? Enter the Trailer Number and Select Door Location. Click on Save.<br>
                 Show Hint? <span><button id="btnPutLiveInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
                 Hide Hint. <span><button id="btnPutLiveInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+            </h5>
+        }
+        else if (Model.Type == "SPOT" && Model.StageStartTime != null && Model.StageFinishTime == null && Model.Status == "Staged")
+        {
+            <h5>
+                Is this Spot load done staging? Type in the Stage Location. Click on the Set Finish button. Click on Save<br>
+                Show Hint? <span><button id="btnStageFinishShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
+                Hide Hint. <span><button id="btnStageFinishHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
             </h5>
         }
     </div>
@@ -298,7 +328,7 @@
                                 <a id="loadStart" class="btn btn-success mt-1" role="button" aria-disabled="false">Set Start</a>    
                             }
                         </div>
-                        <div class="form-group @(Model.TrailerNbr == null ? "hidden" : null)">
+                        <div class="form-group @(Model.TrailerNbr == null || Model.StartTime == null ? "hidden" : null)">
                             <label asp-for="FinishTime" class="control-label @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "text-danger" : null)">Finish Time</label>
                             <input id="loadFinishTime" asp-for="FinishTime" class="form-control @((Model.Status != null && Model.LoaderName != null && Model.FinishTime == null) ? "border-danger" : null)"/>
                             @if (Model.FinishTime != null)
@@ -317,24 +347,31 @@
                             <a class="btn btn-warning" asp-action="Index">Back to List</a>
                         </div>
                         <hr />
-                        @if (Model.Type == "SPOT" && (Model.Status != "At Dock" && Model.StageFinishTime != null) || (Model.Status == "Created" && Model.StageFinishTime == null))
+                        @if (Model.Type == "LIVE")
                         {
-                            @Html.LabelFor(n => n.TrailerNbr, "Spot Trailer Numbers", new {@class="control-label"})
-                            @Html.DropDownListFor(n => n.TrailerNbr, ViewBag.DockLot as SelectList, "Select Trailer", new {@class="form-control", @id="spotTrailer"})                              
-                            <div class="form-group">
-                            <a id="setSpot" class="btn btn-success mt-1" role="button">Set Spot Trailer</a>
-                            </div>
-                            <hr />    
-                        }                    
-                        @if (Model.Status == "At Dock" && Model.StartTime != null && Model.Type == "SPOT")
-                        {
-                            @Html.LabelFor(n => n.Location, new {@class="control-label"})
-                            @Html.DropDownListFor(n => n.Location, ViewBag.Lot as SelectList, "Select LOT", new {@class="form-control border-danger", @id="setLot"})
-                            <div class="form-group">
-                            <a id="lotBtn" class="btn btn-success mt-1" role="button">Set Spot Location</a>
-                            </div>
-                            <hr />
+                            
                         }
+                        else
+                        {
+                            @if (Model.Type == "SPOT" && (Model.Status != "At Dock" && Model.StageFinishTime != null) || (Model.Status == "Created" && Model.StageFinishTime == null))
+                            {
+                                @Html.LabelFor(n => n.TrailerNbr, "Spot Trailer Numbers", new {@class="control-label"})
+                                @Html.DropDownListFor(n => n.TrailerNbr, ViewBag.DockLot as SelectList, "Select Trailer", new {@class="form-control", @id="spotTrailer"})
+                                <div class="form-group">
+                                    <a id="setSpot" class="btn btn-success mt-1" role="button">Set Spot Trailer</a>
+                                </div>
+                                <hr />
+                            }
+                            @if (Model.Status == "At Dock" && Model.StartTime != null && Model.Type == "SPOT")
+                            {
+                                @Html.LabelFor(n => n.Location, new {@class="control-label"})
+                                @Html.DropDownListFor(n => n.Location, ViewBag.Lot as SelectList, "Select LOT", new {@class="form-control border-danger", @id="setLot"})
+                                <div class="form-group">
+                                    <a id="lotBtn" class="btn btn-success mt-1" role="button">Set Spot Location</a>
+                                </div>
+                                <hr />
+                            }
+                        }                        
                     </div>                    
                 </div>
             </div>
