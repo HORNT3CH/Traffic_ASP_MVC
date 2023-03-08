@@ -28,9 +28,18 @@
                     }
                 </div>
                 <div class="form-group">
-                    <label asp-for="CarrierName" class="control-label">Carrier Name</label>
-                    @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
-                    <span asp-validation-for="CarrierName" class="text-danger"></span>
+                    @if (Model.Status == "Full/OutFinished" || Model.Status == "Full/OutComp")
+                    {
+                        <label asp-for="CarrierName" class="control-label">Carrier Name</label>
+                        <input asp-for="CarrierName" class="form-control" readonly />
+                        <span asp-validation-for="CarrierName" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <label asp-for="CarrierName" class="control-label">Carrier Name</label>
+                        @Html.DropDownListFor(n => n.CarrierName, ViewBag.Carrier as SelectList, "Select Carrier" , new {@class="form-control"})
+                        <span asp-validation-for="CarrierName" class="text-danger"></span>
+                    }                    
                 </div>
                 <div class="form-group">
                     <label asp-for="Status" class="control-label">Status</label>
@@ -53,23 +62,50 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="TrailerNbr" class="control-label">Trailer #</label>
-                    <input asp-for="TrailerNbr" class="form-control" />
-                    <span asp-validation-for="TrailerNbr" class="text-danger"></span>
+                    @if (Model.Status == "Full/OutFinished" || Model.Status == "Full/OutComp")
+                    {
+                        <label asp-for="TrailerNbr" class="control-label">Trailer #</label>
+                        <input asp-for="TrailerNbr" class="form-control" readonly/>
+                        <span asp-validation-for="TrailerNbr" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <label asp-for="TrailerNbr" class="control-label">Trailer #</label>
+                        <input asp-for="TrailerNbr" class="form-control" />
+                        <span asp-validation-for="TrailerNbr" class="text-danger"></span>
+                    }                    
                 </div>
                 <div class="form-group">
-                    <label asp-for="Dimension" class="control-label">Status</label>
-                    <select asp-for="Dimension" class="form-control">
-                        <option value="">Select Dimension</option>
-                        <option value="20-LC">20-LC</option>
-                        <option value="40-HC">40-HC</option>
-                        <option value="40-ST">40-ST</option>
-                        <option value="45-FT">45-FT</option>
-                        <option value="48-FT">48-FT</option>
-                        <option value="53-FT">53-FT</option>
-                        <option value="PUP">PUP</option>
-                    </select>
-                    <span asp-validation-for="Dimension" class="text-danger"></span>
+                    @if (Model.Status == "Full/OutFinished" || Model.Status == "Full/OutComp")
+                    {
+                        <label asp-for="Dimension" class="control-label">Status</label>
+                        <select asp-for="Dimension" class="form-control" disabled>
+                            <option value="">Select Dimension</option>
+                            <option value="20-LC">20-LC</option>
+                            <option value="40-HC">40-HC</option>
+                            <option value="40-ST">40-ST</option>
+                            <option value="45-FT">45-FT</option>
+                            <option value="48-FT">48-FT</option>
+                            <option value="53-FT">53-FT</option>
+                            <option value="PUP">PUP</option>
+                        </select>
+                        <span asp-validation-for="Dimension" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <label asp-for="Dimension" class="control-label">Status</label>
+                        <select asp-for="Dimension" class="form-control">
+                            <option value="">Select Dimension</option>
+                            <option value="20-LC">20-LC</option>
+                            <option value="40-HC">40-HC</option>
+                            <option value="40-ST">40-ST</option>
+                            <option value="45-FT">45-FT</option>
+                            <option value="48-FT">48-FT</option>
+                            <option value="53-FT">53-FT</option>
+                            <option value="PUP">PUP</option>
+                        </select>
+                        <span asp-validation-for="Dimension" class="text-danger"></span>
+                    }                    
                 </div>
                 <div class="form-group">
                     <label asp-for="Comments" class="control-label">Comments</label>
@@ -79,14 +115,32 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="LoadNbr" class="control-label">Load #</label>
-                    <input asp-for="LoadNbr" class="form-control" />
-                    <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                    @if (Model.Status == "Full/OutFinished" || Model.Status == "Full/OutComp")
+                    {
+                        <label asp-for="LoadNbr" class="control-label">Load #</label>
+                        <input asp-for="LoadNbr" class="form-control" readonly />
+                        <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <label asp-for="LoadNbr" class="control-label">Load #</label>
+                        <input asp-for="LoadNbr" class="form-control" />
+                        <span asp-validation-for="LoadNbr" class="text-danger"></span>
+                    }                    
                 </div>
                 <div class="form-group">
-                    <label asp-for="MbolNbr" class="control-label">MBOL #</label>
-                    <input asp-for="MbolNbr" class="form-control" />
-                    <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                    @if (Model.Status == "Full/OutFinished" || Model.Status == "Full/OutComp")
+                    {
+                        <label asp-for="MbolNbr" class="control-label">MBOL #</label>
+                        <input asp-for="MbolNbr" class="form-control" readonly/>
+                        <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                    }
+                    else
+                    {
+                        <label asp-for="MbolNbr" class="control-label">MBOL #</label>
+                        <input asp-for="MbolNbr" class="form-control" />
+                        <span asp-validation-for="MbolNbr" class="text-danger"></span>
+                    }                    
                 </div>
                 <div class="form-group">
                     <label asp-for="TimeStamp" class="control-label">Date</label>

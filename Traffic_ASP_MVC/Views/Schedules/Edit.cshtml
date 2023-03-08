@@ -19,15 +19,15 @@
         @if (Model.StartTime == null && Model.LoaderName == null && Model.Status == "At Dock" && (Model.Type == "LIVE" || Model.Type == "SPOT"))
         {
             <h5>
-                Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.<br /> Show Hint? <span><button id="btnStartLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnStartLiveStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Looks like you are starting a load?  Enter Loader Name and click Set Start. Then Click Save.<br />
+                Click Here! <span><button id="btnStartLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.StartTime != null && Model.LoaderName != null && Model.Status == "At Dock" && Model.Type == "LIVE")
         {
             <h5>
-                Is this Live Load done?  If so, Click on Set Finish, make sure status is Loaded, and Click on Save.<br /> Show Hint? <span><button id="btnFinishLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnFinishLiveStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Is this Live Load done?  If so, Click on Set Finish, make sure status is Loaded, and Click on Save.<br />
+                Click Here! <span><button id="btnFinishLiveStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.Status == "Created" && Model.Type == "SPOT")
@@ -38,16 +38,14 @@
             </h5>
             <div id="stageOnly" class="hidden">
                 <h5>
-                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
+                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Click Here!
                     <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                    Hide Hint. <span><button id="btnStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
             <div id="putInDoor" class="hidden">
                 <h5>
-                    Change Status to At Dock. Select Trailer Number from Spot Trailer Numbers Dropdown, CLICK ON Set Spot Trailer Button, select door from Location, and click on Save.")<br /> Show Hint?
+                    Change Status to At Dock. Select Trailer Number from Spot Trailer Numbers Dropdown, CLICK ON Set Spot Trailer Button, select door from Location, and click on Save.")<br /> Click Here!
                     <span><button id="btnInDoorStartHintSpot" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                    Hide Hint. <span><button id="btnInDoorStopHintSpot" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
         }
@@ -59,16 +57,14 @@
             </h5>
             <div id="stageOnly" class="hidden">
                 <h5>
-                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Show Hint?
-                    <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                    Hide Hint. <span><button id="btnStageStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                    Enter Stager name, click on Set Start under STAGING section and Click on Save.<br /> Click Here!
+                    <span><button id="btnStageStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>                    
                 </h5>
             </div>
             <div id="putInDoor" class="hidden">
                 <h5>
-                    Change Status to At Dock. Type in Trailer Number, select door from Location, and click on Save.<br /> Show Hint?
+                    Change Status to At Dock. Type in Trailer Number, select door from Location, and click on Save.<br /> Click Here!
                     <span><button id="btnInDoorStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                    Hide Hint. <span><button id="btnInDoorStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
                 </h5>
             </div>
 
@@ -78,39 +74,36 @@
             <h5>
                 Are we Loading this Staged Spot Load? Select a trailer from Spot Trailer Numbers dropdown. Click on Set Spot Trailer.<br> 
                 Now Select a Door from the Location dropdown. Click on Save.<br>
-                Show Hint? <span><button id="btnPutSpotInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnPutSpotInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Click Here! <span><button id="btnPutSpotInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.StartTime != null && Model.LoaderName != null && Model.Status == "At Dock" && Model.Type == "SPOT" && Model.FinishTime == null)
         {
             <h5>
-                Is this Spot Load done?  If so, Click on Set Finish, make sure status is Loaded. Select Exit or a location in the yard from Location. Now, click on Set Spot Location. Now, Click on Save.<br /> Show Hint? <span><button id="btnFinishSpotStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnFinishSpotStopHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Is this Spot Load done?  If so, Click on Set Finish, make sure status is Loaded. Select Exit or a location in the yard from Location.
+                Now, click on Set Spot Location. Now, Click on Save.<br />
+                Click Here! <span><button id="btnFinishSpotStartHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.Status == "Staged" && Model.StageFinishTime == null && Model.Type == "LIVE")
         {
             <h5>
                 Is this Stage Load Finished? Click on the Set Finish button to set the finish time.  Next, Enter the Stage Location.  Now, Click on Save.<br>
-                Show Hint? <span><button id="btnStageFinishLiveShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnStageFinishLiveHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Click Here! <span><button id="btnStageFinishLiveShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.Status == "Staged" && Model.StageFinishTime != null && Model.Type == "LIVE")
         {
             <h5>
-                Are we Loading this Staged Live Load? Enter the Trailer Number and Select Door Location. Click on Save.<br>
-                Show Hint? <span><button id="btnPutLiveInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnPutLiveInDoorHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Are we Loading this Staged Live Load? Change Status to At Dock. Enter the Trailer Number and Select Door Location. Click on Save.<br>
+                Click Here! <span><button id="btnPutLiveInDoorShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
         else if (Model.Type == "SPOT" && Model.StageStartTime != null && Model.StageFinishTime == null && Model.Status == "Staged")
         {
             <h5>
                 Is this Spot load done staging? Type in the Stage Location. Click on the Set Finish button. Click on Save<br>
-                Show Hint? <span><button id="btnStageFinishShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
-                Hide Hint. <span><button id="btnStageFinishHideHint" class="btn btn-group-sm btn-danger bi bi-x"></button></span>
+                Click Here! <span><button id="btnStageFinishShowHint" class="btn btn-group-sm btn-success bi bi-check"></button></span>
             </h5>
         }
     </div>

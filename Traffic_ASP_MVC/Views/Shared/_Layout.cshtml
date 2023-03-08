@@ -121,209 +121,209 @@
 
     <script>
         // Datatable setup for Schedule page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#schedule').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            language: {
-                searchBuilder: {
-                    button: 'Filter',
+        $(document).ready(function () {
+            $('#schedule').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                language: {
+                    searchBuilder: {
+                        button: 'Filter',
+                    }
+                },
+                buttons: [
+                    'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print', 'searchBuilder'
+                ]
+            });
+        });
+        // Datatable setup for DockLot page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#docklot').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                language: {
+                    searchBuilder: {
+                        button: 'Filter',
+                    }
+                },
+                buttons: [
+                    'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print', 'searchBuilder'
+                ]
+            });
+        });
+        // Datatable setup for Carrier page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#carrier').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                buttons: [
+                    'pageLength'
+                ]
+            });
+        });
+        // Datatable setup for Coordinator page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#coordinator').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                buttons: [
+                    'pageLength'
+                ]
+            });
+        });
+        // Datatable setup for Customer page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#customer').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                buttons: [
+                    'pageLength'
+                ]
+            });
+        });
+        // Datatable setup for State page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#state').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                buttons: [
+                    'pageLength'
+                ]
+            });
+        });
+        // Datatable setup for City page to show filter, export, print, line amount
+        $(document).ready(function () {
+            $('#city').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    ['10 rows', '25 rows', '50 rows', 'Show all']
+                ],
+                buttons: [
+                    'pageLength'
+                ]
+            });
+        });
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "mm/dd/yy",
+                yearRange: "-90:+00"
+            });
+        });
+        $(document).ready(function () {
+            $('#loadStatusSel').change(function () {
+                var strType = $('#loadStatusSel').val();
+                $('input[type="Search"]').val(strType);
+                $('input[type="Search"]').focus();
+            });
+        });
+        $(document).ready(function () {
+            $('#loadTypeSel').change(function () {
+                var strType = $('#loadTypeSel').val();
+                $('input[type="Search"]').val(strType);
+                $('input[type="Search"]').focus();
+            });
+        });
+        $(document).ready(function () {
+            $('#trailerStatus').change(function () {
+                var strType = $('#trailerStatus').val();
+                $('input[type="Search"]').val(strType);
+                $('input[type="Search"]').focus();
+            });
+        });
+        $(document).ready(function () {
+            $('#trailerSize').change(function () {
+                var strType = $('#trailerSize').val();
+                $('input[type="Search"]').val(strType);
+                $('input[type="Search"]').focus();
+            });
+        });
+        $(document).ready(function () {
+            $('#scheduleDate').change(function () {
+                var strType = $('#scheduleDate').val();
+                $('input[type="Search"]').val(strType);
+                $('input[type="Search"]').focus();
+            });
+        });
+        $(document).ready(function () {
+            $('#loadStart').click(function () {
+                if ($('#loader').val() == "") {
+                    $('#loaderWarning').text("Enter Loader Initials");
+                } else {
+                    var d = new Date();
+                    var output = d.toLocaleDateString('sv', {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                    })
+                    $('#loadStartTime').val(output);
                 }
-            },
-            buttons: [
-                'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print', 'searchBuilder'
-            ]
-        } );
-    } );
-    // Datatable setup for DockLot page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#docklot').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            language: {
-                searchBuilder: {
-                    button: 'Filter',
+            });
+        });
+        $(document).ready(function () {
+            $('#loadFinish').click(function () {
+                if ($('#loadStartTime').val() != "") {
+                    var d = new Date();
+                    var output = d.toLocaleDateString('sv', {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                    })
+                    $('#loadFinishTime').val(output);
+                    var status = 'Loaded';
+                    $('#loadStatus').val(status);
                 }
-            },
-            buttons: [
-                'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print', 'searchBuilder'
-            ]
-        } );
-    } );
-    // Datatable setup for Carrier page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#carrier').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons: [
-                'pageLength'
-            ]
-        } );
-    } );
-    // Datatable setup for Coordinator page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#coordinator').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons: [
-                'pageLength'
-            ]
+            });
         });
-    });
-    // Datatable setup for Customer page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#customer').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons: [
-                'pageLength'
-            ]
-        } );
-    } );
-    // Datatable setup for State page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#state').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons: [
-                'pageLength'
-            ]
-        } );
-    } );
-    // Datatable setup for City page to show filter, export, print, line amount
-    $(document).ready(function() {
-        $('#city').DataTable( {
-            dom: 'Bfrtip',
-            lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons: [
-                'pageLength'
-            ]
-        } );
-    } );
-    $(document).ready(function() {
-        $('.datepicker').datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "mm/dd/yy",
-            yearRange: "-90:+00"
+        $(document).ready(function () {
+            $('#stageStart').click(function () {
+                if ($('#stager').val() == "") {
+                    $('#stagerWarning').text("Enter Stager Initials");
+                } else {
+                    var d = new Date();
+                    var output = d.toLocaleDateString('sv', {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                    })
+                    $('#stageStartTime').val(output);
+                    var status = 'Staged';
+                    $('#loadStatus').val(status);
+                }
+            });
         });
-    });
-    $(document).ready(function() {
-        $('#loadStatusSel').change(function() {
-            var strType = $('#loadStatusSel').val();
-            $('input[type="Search"]').val(strType);
-            $('input[type="Search"]').focus();
-        });
-    });
-    $(document).ready(function() {
-        $('#loadTypeSel').change(function() {
-            var strType = $('#loadTypeSel').val();
-            $('input[type="Search"]').val(strType);
-            $('input[type="Search"]').focus();
-        });
-    });
-    $(document).ready(function() {
-        $('#trailerStatus').change(function() {
-            var strType = $('#trailerStatus').val();
-            $('input[type="Search"]').val(strType);
-            $('input[type="Search"]').focus();
-        });
-    });
-    $(document).ready(function() {
-        $('#trailerSize').change(function() {
-            var strType = $('#trailerSize').val();
-            $('input[type="Search"]').val(strType);
-            $('input[type="Search"]').focus();
-        });
-    });
-    $(document).ready(function() {
-        $('#scheduleDate').change(function() {
-            var strType = $('#scheduleDate').val();
-            $('input[type="Search"]').val(strType);
-            $('input[type="Search"]').focus();
-        });
-    });
-    $(document).ready(function() {
-        $('#loadStart').click(function() {
-            if ($('#loader').val() == "") {
-                $('#loaderWarning').text("Enter Loader Initials");
-            } else {
-                var d = new Date();
-                var output = d.toLocaleDateString('sv', {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                })
-                $('#loadStartTime').val(output);
-            }
-        });
-    });
-    $(document).ready(function() {
-        $('#loadFinish').click(function() {
-            if ($('#loadStartTime').val() != "") {
-                var d = new Date();
-                var output = d.toLocaleDateString('sv', {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                })
-                $('#loadFinishTime').val(output);
-                var status = 'Loaded';
-                $('#loadStatus').val(status);
-            }
-        });
-    });
-    $(document).ready(function() {
-        $('#stageStart').click(function() {
-            if ($('#stager').val() == "") {
-                $('#stagerWarning').text("Enter Stager Initials");
-            } else {
-                var d = new Date();
-                var output = d.toLocaleDateString('sv', {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                })
-                $('#stageStartTime').val(output);
-                var status = 'Staged';
-                $('#loadStatus').val(status);
-            }            
-        });
-    });
-    $(document).ready(function() {
-        $('#stageFinish').click(function() {
-            if ($('#stageStartTime').val() != "") {
-                if ($('#StageLocation').val() == "") {
+        $(document).ready(function () {
+            $('#stageFinish').click(function () {
+                if ($('#stageStartTime').val() != "") {
+                    if ($('#StageLocation').val() == "") {
                         $('#stageLocationWarning').text("Enter Stage Location");
                     } else {
                         var d = new Date();
@@ -336,241 +336,152 @@
                             second: 'numeric'
                         })
                         $('#stageFinishTime').val(output);
+                    }
                 }
-            }
-            
-        });
-    });
-    $(document).ready(function() {
-        $('#setSpot').click(function() {
-            var spotTrailerNbr = $('#spotTrailer').val();
-            $('#trailerNbr').val(spotTrailerNbr);
-            $('#loadStatus').val('At Dock');
-        });
-    });
-    $(document).ready(function() {
-        $('#lotBtn').click(function() {
-            var locationName = $('#setLot').val();
-            $('#setLocation').val(locationName);
-        });
-    });
-    $(document).ready(function() {
-        $('#close').on('click', function() {
-            $(this).closest('.alert').hide();
-        });
-    });
 
-    // Help hints for Staging Start
-    $(document).ready(function() {
-        $('#btnStageStartHint').on('click', function() {
-            $('#stageStart').addClass('border-3 border-danger');
-            $('#stageStartTime').addClass('border-3 border-danger');
-            $('#stager').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Help hints for Staging Stop
-    $(document).ready(function () {
-        $('#btnStageStopHint').on('click', function () {            
-            $('#stageStart').removeClass('border-3 border-danger');
-            $('#stageStartTime').removeClass('border-3 border-danger');
-            $('#stager').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
+        $(document).ready(function () {
+            $('#setSpot').click(function () {
+                var spotTrailerNbr = $('#spotTrailer').val();
+                $('#trailerNbr').val(spotTrailerNbr);
+                $('#loadStatus').val('At Dock');
+            });
         });
-    });
-    // Help hints for Starting Live Start Hint
-    $(document).ready(function () {
-        $('#btnStartLiveStartHint').on('click', function () {
-            $('#loadStart').addClass('border-3 border-danger');
-            $('#loadStartTime').addClass('border-3 border-danger');
-            $('#loader').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
+        $(document).ready(function () {
+            $('#lotBtn').click(function () {
+                var locationName = $('#setLot').val();
+                $('#setLocation').val(locationName);
+            });
         });
-    });
-    // Help hints for Starting Live Stop Hint
-    $(document).ready(function () {
-        $('#btnStartLiveStopHint').on('click', function () {
-            $('#loadStart').removeClass('border-3 border-danger');
-            $('#loadStartTime').removeClass('border-3 border-danger');
-            $('#loader').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
+        $(document).ready(function () {
+            $('#close').on('click', function () {
+                $(this).closest('.alert').hide();
+            });
         });
-    });
-    // Help hints for Finishing Live Start Hint
-    $(document).ready(function () {
-        $('#btnFinishLiveStartHint').on('click', function () {
-            $('#loadStatus').addClass('border-3 border-danger');
-            $('#loadFinishTime').addClass('border-3 border-danger');
-            $('#loadFinish').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
+
+        // Help hints for Staging Start
+        $(document).ready(function () {
+            $('#btnStageStartHint').on('click', function () {
+                $('#stageStart').addClass('border-3 border-danger');
+                $('#stageStartTime').addClass('border-3 border-danger');
+                $('#stager').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Help hints for Finishing Live Stop Hint
-    $(document).ready(function () {
-        $('#btnFinishLiveStopHint').on('click', function () {
-            $('#loadStatus').removeClass('border-3 border-danger');
-            $('#loadFinishTime').removeClass('border-3 border-danger');
-            $('#loadFinish').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
+        // Help hints for Starting Live Start Hint
+        $(document).ready(function () {
+            $('#btnStartLiveStartHint').on('click', function () {
+                $('#loadStart').addClass('border-3 border-danger');
+                $('#loadStartTime').addClass('border-3 border-danger');
+                $('#loader').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Help hints for Finishing Spot Start Hint
-    $(document).ready(function () {
-        $('#btnFinishSpotStartHint').on('click', function () {
-            $('#loadStatus').addClass('border-3 border-danger');
-            $('#loadFinishTime').addClass('border-3 border-danger');
-            $('#loadFinish').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-            $('#setLot').addClass('border-3 border-danger');
-            $('#lotBtn').addClass('border-3 border-danger');
+        // Help hints for Finishing Live Start Hint
+        $(document).ready(function () {
+            $('#btnFinishLiveStartHint').on('click', function () {
+                $('#loadStatus').addClass('border-3 border-danger');
+                $('#loadFinishTime').addClass('border-3 border-danger');
+                $('#loadFinish').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Help hints for Finishing Spot Stop Hint
-    $(document).ready(function () {
-        $('#btnFinishSpotStopHint').on('click', function () {
-            $('#loadStatus').removeClass('border-3 border-danger');
-            $('#loadFinishTime').removeClass('border-3 border-danger');
-            $('#loadFinish').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#setLot').removeClass('border-3 border-danger');
-            $('#lotBtn').removeClass('border-3 border-danger');
+        // Help hints for Finishing Spot Start Hint
+        $(document).ready(function () {
+            $('#btnFinishSpotStartHint').on('click', function () {
+                $('#loadStatus').addClass('border-3 border-danger');
+                $('#loadFinishTime').addClass('border-3 border-danger');
+                $('#loadFinish').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#setLot').addClass('border-3 border-danger');
+                $('#lotBtn').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Stage a order in Created Status
-    $(document).ready(function () {
-        $('#btnSetupToStageLive').on('click', function () {
-            $('#stageSection').removeClass('hidden');
-            $('#stageOnly').removeClass('hidden');
-            $('#putInDoor').addClass('hidden');
-            $('#trailerNbr').removeClass('border-3 border-danger');
-            $('#Location').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#stageStart').removeClass('border-3 border-danger');
-            $('#spotTrailer').removeClass('border-3 border-danger');
-            $('#setSpot').removeClass('border-3 border-danger');
+        // Stage a order in Created Status
+        $(document).ready(function () {
+            $('#btnSetupToStageLive').on('click', function () {
+                $('#stageSection').removeClass('hidden');
+                $('#stageOnly').removeClass('hidden');
+                $('#putInDoor').addClass('hidden');
+                $('#trailerNbr').removeClass('border-3 border-danger');
+                $('#Location').removeClass('border-3 border-danger');
+                $('#save').removeClass('border-3 border-danger');
+                $('#stageStart').removeClass('border-3 border-danger');
+                $('#spotTrailer').removeClass('border-3 border-danger');
+                $('#setSpot').removeClass('border-3 border-danger');
+            });
         });
-    });
-    // Put a Trailer in door for Created Status
-    $(document).ready(function () {
-        $('#btnPutInDoorLive').on('click', function () {
-            $('#stageSection').addClass('hidden');
-            $('#putInDoor').removeClass('hidden');
-            $('#stageOnly').addClass('hidden');
-            $('#stager').removeClass('border-3 border-danger');
-            $('#stageStartTime').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
+        // Put a Trailer in door for Created Status
+        $(document).ready(function () {
+            $('#btnPutInDoorLive').on('click', function () {
+                $('#stageSection').addClass('hidden');
+                $('#putInDoor').removeClass('hidden');
+                $('#stageOnly').addClass('hidden');
+                $('#stager').removeClass('border-3 border-danger');
+                $('#stageStartTime').removeClass('border-3 border-danger');
+                $('#save').removeClass('border-3 border-danger');
+            });
         });
-    });
-    // Put a Trailer in door hint start
-    $(document).ready(function () {
+        // Put a Trailer in door hint start
+        $(document).ready(function () {
             $('#btnInDoorStartHint').on('click', function () {
-            $('#trailerNbr').addClass('border-3 border-danger');
-            $('#Location').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-            $('#loadStatus').addClass('border-3 border-danger');
+                $('#trailerNbr').addClass('border-3 border-danger');
+                $('#Location').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#loadStatus').addClass('border-3 border-danger');
+                $('#loadStatus').val('At Dock');
+            });
         });
-    });
-    // Put a Trailer in door hint start spot
-    $(document).ready(function () {
-        $('#btnInDoorStartHintSpot').on('click', function () {
-            $('#trailerNbr').addClass('border-3 border-danger');
-            $('#Location').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-            $('#spotTrailer').addClass('border-3 border-danger');
-            $('#setSpot').addClass('border-3 border-danger');
-            $('#loadStatus').addClass('border-3 border-danger');
+        // Put a Trailer in door hint start spot
+        $(document).ready(function () {
+            $('#btnInDoorStartHintSpot').on('click', function () {
+                $('#trailerNbr').addClass('border-3 border-danger');
+                $('#Location').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#spotTrailer').addClass('border-3 border-danger');
+                $('#setSpot').addClass('border-3 border-danger');
+                $('#loadStatus').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Put a Trailer in door hint stop
-    $(document).ready(function () {
-            $('#btnInDoorStopHint').on('click', function () {
-            $('#trailerNbr').removeClass('border-3 border-danger');
-            $('#Location').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#loadStatus').removeClass('border-3 border-danger');
+        // Helps hints for finishing a staged live load
+        $(document).ready(function () {
+            $('#btnStageFinishLiveShowHint').on('click', function () {
+                $('#stageFinishTime').addClass('border-3 border-danger');
+                $('#stageFinish').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#StageLocation').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Put a Trailer in door hint stop spot
-    $(document).ready(function () {
-        $('#btnInDoorStopHintSpot').on('click', function () {
-            $('#trailerNbr').removeClass('border-3 border-danger');
-            $('#Location').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#spotTrailer').removeClass('border-3 border-danger');
-            $('#setSpot').removeClass('border-3 border-danger');
-            $('#loadStatus').removeClass('border-3 border-danger');
+        // Show hints for putting a spot trailer in for a staged load
+        $(document).ready(function () {
+            $('#btnPutSpotInDoorShowHint').on('click', function () {
+                $('#spotTrailer').addClass('border-3 border-danger');
+                $('#setSpot').addClass('border-3 border-danger');
+                $('#Location').addClass('border-3 border-danger');
+                $('#trailerNbr').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Helps hints for finishing a staged live load
-    $(document).ready(function () {
-        $('#btnStageFinishLiveShowHint').on('click', function () {
-            $('#stageFinishTime').addClass('border-3 border-danger');
-            $('#stageFinish').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-            $('#StageLocation').addClass('border-3 border-danger');            
+        // Show hints for putting a live trailer in for staged live
+        $(document).ready(function () {
+            $('#btnPutLiveInDoorShowHint').on('click', function () {
+                $('#trailerNbr').addClass('border-3 border-danger');
+                $('#Location').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#loadStatus').addClass('border-3 border-danger');
+                $('#loadStatus').val('At Dock');
+            });
         });
-    });
-    // Hide hints for finishing a staged live load
-    $(document).ready(function () {
-        $('#btnStageFinishLiveHideHint').on('click', function () {
-            $('#stageFinishTime').removeClass('border-3 border-danger');
-            $('#stageFinish').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#StageLocation').removeClass('border-3 border-danger');
+        // Show hints for Stage Finish
+        $(document).ready(function () {
+            $('#btnStageFinishShowHint').on('click', function () {
+                $('#stageFinishTime').addClass('border-3 border-danger');
+                $('#stageFinish').addClass('border-3 border-danger');
+                $('#save').addClass('border-3 border-danger');
+                $('#StageLocation').addClass('border-3 border-danger');
+            });
         });
-    });
-    // Show hints for putting a spot trailer in for a staged load
-    $(document).ready(function () {
-        $('#btnPutSpotInDoorShowHint').on('click', function () {
-            $('#spotTrailer').addClass('border-3 border-danger');
-            $('#setSpot').addClass('border-3 border-danger');
-            $('#Location').addClass('border-3 border-danger');
-            $('#trailerNbr').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-        });
-    });
-    // Hide hints for putting a spot trailer in for a staged load
-    $(document).ready(function () {
-        $('#btnPutSpotInDoorHideHint').on('click', function () {
-            $('#spotTrailer').removeClass('border-3 border-danger');
-            $('#setSpot').removeClass('border-3 border-danger');
-            $('#Location').removeClass('border-3 border-danger');
-            $('#trailerNbr').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-        });
-    });
-    // Show hints for putting a live trailer in for staged live
-    $(document).ready(function () {
-        $('#btnPutLiveInDoorShowHint').on('click', function () {
-            $('#trailerNbr').addClass('border-3 border-danger');
-            $('#Location').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-        });
-    });
-    // Hide hints for putting a live trailer in for staged live
-    $(document).ready(function () {
-        $('#btnPutLiveInDoorHideHint').on('click', function () {
-            $('#trailerNbr').removeClass('border-3 border-danger');
-            $('#Location').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-        });
-    });
-    $(document).ready(function () {
-        $('#btnStageFinishShowHint').on('click', function () {
-            $('#stageFinishTime').addClass('border-3 border-danger');
-            $('#stageFinish').addClass('border-3 border-danger');
-            $('#save').addClass('border-3 border-danger');
-            $('#StageLocation').addClass('border-3 border-danger');
-        });
-    });
-    $(document).ready(function () {
-        $('#btnStageFinishHideHint').on('click', function () {
-            $('#stageFinishTime').removeClass('border-3 border-danger');
-            $('#stageFinish').removeClass('border-3 border-danger');
-            $('#save').removeClass('border-3 border-danger');
-            $('#StageLocation').removeClass('border-3 border-danger');
-        });
-    });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
